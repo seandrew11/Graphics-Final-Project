@@ -135,7 +135,7 @@
 				{
 					"directoryIndex" : 2,
 					"id" : "glad::@df5e3ce796715454c4bb",
-					"jsonFile" : "target-glad-Debug-be3470111fdf21f5f236.json",
+					"jsonFile" : "target-glad-Debug-97600276de8a273ba6d8.json",
 					"name" : "glad",
 					"projectIndex" : 1
 				},
@@ -148,9 +148,9 @@
 				},
 				{
 					"directoryIndex" : 0,
-					"id" : "lab1_window::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-lab1_window-Debug-ed5f2465a9aec5f5241b.json",
-					"name" : "lab1_window",
+					"id" : "main::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-main-Debug-f5cfdcbf1eca7a5e4c07.json",
+					"name" : "main",
 					"projectIndex" : 0
 				}
 			]

@@ -1,4 +1,4 @@
-C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/cmake-build-debug/CMakeFiles/lab1_window.dir
+C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/cmake-build-debug/CMakeFiles/main.dir
 C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/cmake-build-debug/CMakeFiles/edit_cache.dir
 C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/cmake-build-debug/CMakeFiles/rebuild_cache.dir
 C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/cmake-build-debug/external/CMakeFiles/edit_cache.dir

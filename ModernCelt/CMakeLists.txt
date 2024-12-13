@@ -16,11 +16,12 @@ include_directories(
 	lab1/
 )
 
-add_executable(lab1_window
-	project/lab1_window.cpp
-		project/lab1_window.cpp
+add_executable(main
+	project/main.cpp
+		project/main.cpp
+		project/main.cpp
 )
-target_link_libraries(lab1_window
+target_link_libraries(main
 	${OPENGL_LIBRARY}
 	glfw
 )

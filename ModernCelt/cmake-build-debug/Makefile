@@ -116,17 +116,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named lab1_window
+# Target rules for targets named main
 
 # Build rule for target.
-lab1_window: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 lab1_window
-.PHONY : lab1_window
+main: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 main
+.PHONY : main
 
 # fast build rule for target.
-lab1_window/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab1_window.dir\build.make CMakeFiles/lab1_window.dir/build
-.PHONY : lab1_window/fast
+main/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/build
+.PHONY : main/fast
 
 #=============================================================================
 # Target rules for targets named glad
@@ -154,29 +154,29 @@ glfw/fast:
 	$(MAKE) $(MAKESILENT) -f external\glfw-3.1.2\src\CMakeFiles\glfw.dir\build.make external/glfw-3.1.2/src/CMakeFiles/glfw.dir/build
 .PHONY : glfw/fast
 
-project/lab1_window.obj: project/lab1_window.cpp.obj
-.PHONY : project/lab1_window.obj
+project/main.obj: project/main.cpp.obj
+.PHONY : project/main.obj
 
 # target to build an object file
-project/lab1_window.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab1_window.dir\build.make CMakeFiles/lab1_window.dir/project/lab1_window.cpp.obj
-.PHONY : project/lab1_window.cpp.obj
+project/main.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/project/main.cpp.obj
+.PHONY : project/main.cpp.obj
 
-project/lab1_window.i: project/lab1_window.cpp.i
-.PHONY : project/lab1_window.i
+project/main.i: project/main.cpp.i
+.PHONY : project/main.i
 
 # target to preprocess a source file
-project/lab1_window.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab1_window.dir\build.make CMakeFiles/lab1_window.dir/project/lab1_window.cpp.i
-.PHONY : project/lab1_window.cpp.i
+project/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/project/main.cpp.i
+.PHONY : project/main.cpp.i
 
-project/lab1_window.s: project/lab1_window.cpp.s
-.PHONY : project/lab1_window.s
+project/main.s: project/main.cpp.s
+.PHONY : project/main.s
 
 # target to generate assembly for a file
-project/lab1_window.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab1_window.dir\build.make CMakeFiles/lab1_window.dir/project/lab1_window.cpp.s
-.PHONY : project/lab1_window.cpp.s
+project/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/project/main.cpp.s
+.PHONY : project/main.cpp.s
 
 # Help Target
 help:
@@ -188,10 +188,10 @@ help:
 	@echo ... rebuild_cache
 	@echo ... glad
 	@echo ... glfw
-	@echo ... lab1_window
-	@echo ... project/lab1_window.obj
-	@echo ... project/lab1_window.i
-	@echo ... project/lab1_window.s
+	@echo ... main
+	@echo ... project/main.obj
+	@echo ... project/main.i
+	@echo ... project/main.s
 .PHONY : help
 
 

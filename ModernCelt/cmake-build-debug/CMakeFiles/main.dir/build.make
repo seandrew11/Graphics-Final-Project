@@ -83,21 +83,55 @@ CMakeFiles/main.dir/project/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/project/main.cpp.s"
 	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\sandr\Desktop\College\Computer Graphics\Graphics-Final-Project\ModernCelt\project\main.cpp" -o CMakeFiles\main.dir\project\main.cpp.s
 
+CMakeFiles/main.dir/project/Terrain.cpp.obj: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/project/Terrain.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
+CMakeFiles/main.dir/project/Terrain.cpp.obj: C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/project/Terrain.cpp
+CMakeFiles/main.dir/project/Terrain.cpp.obj: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\sandr\Desktop\College\Computer Graphics\Graphics-Final-Project\ModernCelt\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/main.dir/project/Terrain.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/project/Terrain.cpp.obj -MF CMakeFiles\main.dir\project\Terrain.cpp.obj.d -o CMakeFiles\main.dir\project\Terrain.cpp.obj -c "C:\Users\sandr\Desktop\College\Computer Graphics\Graphics-Final-Project\ModernCelt\project\Terrain.cpp"
+
+CMakeFiles/main.dir/project/Terrain.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/project/Terrain.cpp.i"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\sandr\Desktop\College\Computer Graphics\Graphics-Final-Project\ModernCelt\project\Terrain.cpp" > CMakeFiles\main.dir\project\Terrain.cpp.i
+
+CMakeFiles/main.dir/project/Terrain.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/project/Terrain.cpp.s"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\sandr\Desktop\College\Computer Graphics\Graphics-Final-Project\ModernCelt\project\Terrain.cpp" -o CMakeFiles\main.dir\project\Terrain.cpp.s
+
+CMakeFiles/main.dir/project/render/shader.cpp.obj: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/project/render/shader.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
+CMakeFiles/main.dir/project/render/shader.cpp.obj: C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/project/render/shader.cpp
+CMakeFiles/main.dir/project/render/shader.cpp.obj: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\sandr\Desktop\College\Computer Graphics\Graphics-Final-Project\ModernCelt\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/main.dir/project/render/shader.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/project/render/shader.cpp.obj -MF CMakeFiles\main.dir\project\render\shader.cpp.obj.d -o CMakeFiles\main.dir\project\render\shader.cpp.obj -c "C:\Users\sandr\Desktop\College\Computer Graphics\Graphics-Final-Project\ModernCelt\project\render\shader.cpp"
+
+CMakeFiles/main.dir/project/render/shader.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/project/render/shader.cpp.i"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\sandr\Desktop\College\Computer Graphics\Graphics-Final-Project\ModernCelt\project\render\shader.cpp" > CMakeFiles\main.dir\project\render\shader.cpp.i
+
+CMakeFiles/main.dir/project/render/shader.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/project/render/shader.cpp.s"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\sandr\Desktop\College\Computer Graphics\Graphics-Final-Project\ModernCelt\project\render\shader.cpp" -o CMakeFiles\main.dir\project\render\shader.cpp.s
+
 # Object files for target main
 main_OBJECTS = \
-"CMakeFiles/main.dir/project/main.cpp.obj"
+"CMakeFiles/main.dir/project/main.cpp.obj" \
+"CMakeFiles/main.dir/project/Terrain.cpp.obj" \
+"CMakeFiles/main.dir/project/render/shader.cpp.obj"
 
 # External object files for target main
 main_EXTERNAL_OBJECTS =
 
 main.exe: CMakeFiles/main.dir/project/main.cpp.obj
+main.exe: CMakeFiles/main.dir/project/Terrain.cpp.obj
+main.exe: CMakeFiles/main.dir/project/render/shader.cpp.obj
 main.exe: CMakeFiles/main.dir/build.make
 main.exe: glfw3dll.a
 main.exe: libglad.dll.a
 main.exe: CMakeFiles/main.dir/linkLibs.rsp
 main.exe: CMakeFiles/main.dir/objects1.rsp
 main.exe: CMakeFiles/main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="C:\Users\sandr\Desktop\College\Computer Graphics\Graphics-Final-Project\ModernCelt\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable main.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="C:\Users\sandr\Desktop\College\Computer Graphics\Graphics-Final-Project\ModernCelt\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable main.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\main.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

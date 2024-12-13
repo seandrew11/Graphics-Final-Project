@@ -1,10 +1,10 @@
 #include "shader.h"
-
-#include <string> 
-#include <iostream> 
-#include <fstream>
-#include <sstream> 
+#include <stdio.h>
+#include <string>
 #include <vector>
+#include <iostream>
+#include <fstream>
+#include <sstream>
 
 GLuint LoadShadersFromFile(const char *vertex_file_path, const char *fragment_file_path)
 {

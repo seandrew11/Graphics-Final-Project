@@ -18,6 +18,9 @@ include_directories(
 
 add_executable(main
 		project/main.cpp
+		project/Terrain.cpp
+		project/Terrain.h
+		project/render/shader.cpp
 )
 
 target_link_libraries(main

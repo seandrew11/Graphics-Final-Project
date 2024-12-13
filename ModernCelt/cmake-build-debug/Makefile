@@ -154,6 +154,30 @@ glfw/fast:
 	$(MAKE) $(MAKESILENT) -f external\glfw-3.1.2\src\CMakeFiles\glfw.dir\build.make external/glfw-3.1.2/src/CMakeFiles/glfw.dir/build
 .PHONY : glfw/fast
 
+project/Terrain.obj: project/Terrain.cpp.obj
+.PHONY : project/Terrain.obj
+
+# target to build an object file
+project/Terrain.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/project/Terrain.cpp.obj
+.PHONY : project/Terrain.cpp.obj
+
+project/Terrain.i: project/Terrain.cpp.i
+.PHONY : project/Terrain.i
+
+# target to preprocess a source file
+project/Terrain.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/project/Terrain.cpp.i
+.PHONY : project/Terrain.cpp.i
+
+project/Terrain.s: project/Terrain.cpp.s
+.PHONY : project/Terrain.s
+
+# target to generate assembly for a file
+project/Terrain.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/project/Terrain.cpp.s
+.PHONY : project/Terrain.cpp.s
+
 project/main.obj: project/main.cpp.obj
 .PHONY : project/main.obj
 
@@ -178,6 +202,30 @@ project/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/project/main.cpp.s
 .PHONY : project/main.cpp.s
 
+project/render/shader.obj: project/render/shader.cpp.obj
+.PHONY : project/render/shader.obj
+
+# target to build an object file
+project/render/shader.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/project/render/shader.cpp.obj
+.PHONY : project/render/shader.cpp.obj
+
+project/render/shader.i: project/render/shader.cpp.i
+.PHONY : project/render/shader.i
+
+# target to preprocess a source file
+project/render/shader.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/project/render/shader.cpp.i
+.PHONY : project/render/shader.cpp.i
+
+project/render/shader.s: project/render/shader.cpp.s
+.PHONY : project/render/shader.s
+
+# target to generate assembly for a file
+project/render/shader.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/project/render/shader.cpp.s
+.PHONY : project/render/shader.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -189,9 +237,15 @@ help:
 	@echo ... glad
 	@echo ... glfw
 	@echo ... main
+	@echo ... project/Terrain.obj
+	@echo ... project/Terrain.i
+	@echo ... project/Terrain.s
 	@echo ... project/main.obj
 	@echo ... project/main.i
 	@echo ... project/main.s
+	@echo ... project/render/shader.obj
+	@echo ... project/render/shader.i
+	@echo ... project/render/shader.s
 .PHONY : help
 
 

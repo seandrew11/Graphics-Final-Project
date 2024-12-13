@@ -1,85 +1,100 @@
-// GLFW is a modern library that provides simple APIs for creating a window 
-// for OpenGL use and for receiving keyboard and mouse events. 
-// Alternatives: GLUT, FreeGLUT. 
-
+#include <glad/gl.h>
 #include <GLFW/glfw3.h>
-
-// GLM is a header-only C++ mathematics library for OpenGL
-// This library provides data types such as vec3 and mat4 that are useful
-// for our transformations. 
-// Alternatives: Eigen. 
-// Or you can just reimplement your own vec3, mat4, dot product, cross product, etc.
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-
-#include <vector>
 #include <iostream>
+#include "Terrain.h"
+#include "render/shader.h"
 
-GLFWwindow *window;
+GLFWwindow* window;
 
-void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode);
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 
-int main(void)
-{
-	// Initialise GLFW
-	if (!glfwInit())
-	{
-		std::cerr << "Failed to initialize GLFW." << std::endl;
-		return -1;
-	}
+int main(void) {
+    // Initialize GLFW
+    if (!glfwInit()) {
+        std::cerr << "Failed to initialize GLFW." << std::endl;
+        return -1;
+    }
 
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // For MacOS
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	// Open a window and create its OpenGL context
-	window = glfwCreateWindow(1024, 768, "Lab 1", NULL, NULL);
-	if (window == NULL)
-	{
-		std::cerr << "Failed to open a GLFW window." << std::endl;
-		glfwTerminate();
-		return -1;
-	}
-	glfwMakeContextCurrent(window);
+    window = glfwCreateWindow(1024, 768, "Terrain Generation", NULL, NULL);
+    if (window == NULL) {
+        std::cerr << "Failed to open GLFW window." << std::endl;
+        glfwTerminate();
+        return -1;
+    }
+    glfwMakeContextCurrent(window);
 
-	// Ensure we can capture the escape key being pressed below
-	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
-	glfwSetKeyCallback(window, key_callback);
+    // Load OpenGL functions
+    int version = gladLoadGL(glfwGetProcAddress);
+    if (version == 0) {
+        std::cerr << "Failed to initialize OpenGL context." << std::endl;
+        return -1;
+    }
 
-	// Dark blue background
-	glClearColor(0.2f, 0.2f, 0.25f, 0.0f);
+    glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+    glfwSetKeyCallback(window, key_callback);
 
-	do
-	{
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    // Enable depth testing
+    glEnable(GL_DEPTH_TEST);
 
-		// Swap buffers
-		glfwSwapBuffers(window);
-		glfwPollEvents();
+    // Load shaders
+    GLuint shaderProgram = LoadShadersFromFile("../project/terrain.vert", "../project/terrain.frag");
+    if (shaderProgram == 0) {
+        std::cerr << "Failed to load shaders" << std::endl;
+        return -1;
+    }
 
-	} // Check if the ESC key was pressed or the window was closed
-	while (!glfwWindowShouldClose(window));
+    // Create terrain
+    Terrain terrain(50, 50);
 
-	// Close OpenGL window and terminate GLFW
-	glfwTerminate();
+    // Set up projection matrix
+    glm::mat4 projection = glm::perspective(glm::radians(45.0f), 1024.0f/768.0f, 0.1f, 100.0f);
 
-	return 0;
+    // Set up view matrix
+    glm::mat4 view = glm::lookAt(
+        glm::vec3(0, 50, 50),  // Move camera further back and higher up
+        glm::vec3(0, 0, 0),    // 0,0,0 origin
+        glm::vec3(0, 1, 0)     // Up vector
+    );
+
+    // Model matrix
+    glm::mat4 model = glm::mat4(1.0f);
+
+    // Background color
+    glClearColor(0.2f, 0.2f, 0.25f, 0.0f);
+
+    do {
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        // Use shader and set MVP matrix
+        glUseProgram(shaderProgram);
+        glm::mat4 MVP = projection * view * model;
+        GLuint MatrixID = glGetUniformLocation(shaderProgram, "MVP");
+        glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
+
+        // Render terrain
+        terrain.render();
+
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+
+    } while (!glfwWindowShouldClose(window));
+
+    // Cleanup
+    glDeleteProgram(shaderProgram);
+    glfwTerminate();
+
+    return 0;
 }
 
-// Is called whenever a key is pressed/released via GLFW
-void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode)
-{
-	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
-	{
-		std::cout << "Space key is pressed." << std::endl;
-	}
-
-	if (key == GLFW_KEY_A && action == GLFW_PRESS)
-	{
-		std::cout << "A key is pressed." << std::endl;
-	}
-
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, GL_TRUE);
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode) {
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
+        glfwSetWindowShouldClose(window, GL_TRUE);
+    }
 }

@@ -5,8 +5,37 @@
 #include <iostream>
 #include "Terrain.h"
 #include "render/shader.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
 GLFWwindow* window;
+
+static float viewAzimuth = 0.f;
+static float viewPolar = 0.f;
+static float viewDistance = 30.0f;
+static glm::vec3 eye_center;
+static glm::vec3 lookat(0, 0, 0);
+static glm::vec3 up(0, 1, 0);
+
+GLuint LoadTerrainTexture(const char* texture_file_path) {
+    int w, h, channels;
+    uint8_t* img = stbi_load(texture_file_path, &w, &h, &channels, 3);
+    GLuint texture;
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    if (img) {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, w, h, 0, GL_RGB, GL_UNSIGNED_BYTE, img);
+        glGenerateMipmap(GL_TEXTURE_2D);
+    }
+    stbi_image_free(img);
+    return texture;
+}
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 
@@ -42,6 +71,7 @@ int main(void) {
 
     // Enable depth testing
     glEnable(GL_DEPTH_TEST);
+    glClearColor(0.2f, 0.2f, 0.25f, 0.0f);
 
     // Load shaders
     GLuint shaderProgram = LoadShadersFromFile("../project/terrain.vert", "../project/terrain.frag");
@@ -50,32 +80,29 @@ int main(void) {
         return -1;
     }
 
+
     // Create terrain
     Terrain terrain(50, 50);
+    GLuint terrainTexture = LoadTerrainTexture("../project/textures/Grass_01.png");
+    GLuint textureSamplerID = glGetUniformLocation(shaderProgram, "terrainTexture");
+    terrain.setTexture(terrainTexture, textureSamplerID);
 
-    // Set up projection matrix
-    glm::mat4 projection = glm::perspective(glm::radians(45.0f), 1024.0f/768.0f, 0.1f, 100.0f);
+    // Camera setup
+    eye_center = glm::vec3(viewDistance * cos(viewAzimuth), viewDistance * cos(viewPolar),
+                          viewDistance * sin(viewAzimuth));
 
-    // Set up view matrix
-    glm::mat4 view = glm::lookAt(
-        glm::vec3(0, 50, 50),  // Move camera further back and higher up
-        glm::vec3(0, 0, 0),    // 0,0,0 origin
-        glm::vec3(0, 1, 0)     // Up vector
-    );
-
-    // Model matrix
-    glm::mat4 model = glm::mat4(1.0f);
-
-    // Background color
-    glClearColor(0.2f, 0.2f, 0.25f, 0.0f);
+    glm::mat4 projectionMatrix = glm::perspective(glm::radians(60.0f), 4.0f/3.0f, 0.1f, 1000.0f);
+    GLuint MatrixID = glGetUniformLocation(shaderProgram, "MVP");
 
     do {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // Use shader and set MVP matrix
+        glm::mat4 viewMatrix = glm::lookAt(eye_center, lookat, up);
+        glm::mat4 MVP = projectionMatrix * viewMatrix;
         glUseProgram(shaderProgram);
-        glm::mat4 MVP = projection * view * model;
-        GLuint MatrixID = glGetUniformLocation(shaderProgram, "MVP");
+
+
         glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
 
         // Render terrain

@@ -1,7 +1,9 @@
 #include "Terrain.h"
 #include <iostream>
+#include "../project/include/PerlinNoise.hpp"
 
-Terrain::Terrain(int w, int h) : width(w), height(h), VAO(0), VBO(0), EBO(0) {
+Terrain::Terrain(int w, int h) : width(w), height(h), VAO(0), VBO(0), EBO(0), textureID(0) {
+    perlin.reseed(1234);
     generateTerrain();
     setupBuffers();
 }
@@ -11,10 +13,23 @@ Terrain::~Terrain() {
 }
 
 float Terrain::getHeight(int x, int z) {
-    if (x < 0 || x >= width || z < 0 || z >= height) {
-        return 0.0f;
+
+    const double scale = 0.03;
+    const int octaves = 4;
+    const double persistence = 0.5;
+
+    double amplitude = 18.0;
+    double frequency = scale;
+    double height = 0.0;
+    double maxValue = 0.0;
+
+    for (int i = 0; i < octaves; i++) {
+        height += perlin.noise2D(x * frequency, z * frequency) * amplitude;
+        maxValue += amplitude;
+        amplitude *= persistence;
+        frequency *= 2.0;
     }
-    return 2.0f * sin(x * 0.1f) * cos(z * 0.1f);
+    return height * 12.0 / maxValue;
 }
 
 glm::vec3 Terrain::calculateNormal(int x, int z) {
@@ -26,6 +41,12 @@ glm::vec3 Terrain::calculateNormal(int x, int z) {
     glm::vec3 normal(heightL - heightR, 2.0f, heightD - heightU);
     return glm::normalize(normal);
 }
+
+void Terrain::setTexture(GLuint texID, GLuint samplerID) {
+    textureID = texID;
+    textureSamplerID = samplerID;
+}
+
 
 void Terrain::generateTerrain() {
     // Generate grid vertices
@@ -40,7 +61,7 @@ void Terrain::generateTerrain() {
 
             vertex.position = glm::vec3(xPos, heightValue, zPos);
             vertex.normal = calculateNormal(x, z);
-            vertex.texCoord = glm::vec2(x / (float)width, z / (float)height);
+            vertex.texCoord = glm::vec2(x / (float)width * 20.0f, z / (float)height * 20.0f);
             vertices.push_back(vertex);
         }
     }
@@ -98,6 +119,11 @@ void Terrain::setupBuffers() {
 
 void Terrain::render() {
     glBindVertexArray(VAO);
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, textureID);
+    glUniform1i(textureSamplerID,0);
+
     glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }

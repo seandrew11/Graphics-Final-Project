@@ -29,13 +29,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 19,
+				"line" : 21,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 26,
+				"line" : 28,
 				"parent" : 0
 			},
 			{
@@ -52,7 +52,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g -std=gnu++11 -fdiagnostics-color=always"
+					"fragment" : "-g -std=gnu++17 -fdiagnostics-color=always"
 				}
 			],
 			"includes" : 
@@ -74,6 +74,14 @@
 					"path" : "C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/project"
 				},
 				{
+					"backtrace" : 3,
+					"path" : "C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/project/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/external/stb"
+				},
+				{
 					"backtrace" : 2,
 					"path" : "C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/external/glad-3.3/include"
 				}
@@ -85,7 +93,7 @@
 				[
 					1
 				],
-				"standard" : "11"
+				"standard" : "17"
 			},
 			"sourceIndexes" : 
 			[

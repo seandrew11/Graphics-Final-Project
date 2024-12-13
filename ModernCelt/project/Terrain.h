@@ -4,6 +4,8 @@
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <vector>
+#include "../project/include/PerlinNoise.hpp"
+using namespace siv;
 
 struct Vertex {
     glm::vec3 position;    // Position in 3D space
@@ -17,8 +19,12 @@ public:
     ~Terrain();
 
     void render();
+    void setTexture(GLuint texID, GLuint samplerID);
 
 private:
+    GLuint textureID;
+    GLuint textureSamplerID;
+    siv::PerlinNoise perlin;
     std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;
 

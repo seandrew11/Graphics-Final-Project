@@ -32,4 +32,8 @@ private:
     void generateTerrain();
     void setupBuffers();
     void cleanup();
+
+    // Add these two function declarations
+    float getHeight(int x, int z);
+    glm::vec3 calculateNormal(int x, int z);
 };

@@ -10,14 +10,36 @@ Terrain::~Terrain() {
     cleanup();
 }
 
+float Terrain::getHeight(int x, int z) {
+    if (x < 0 || x >= width || z < 0 || z >= height) {
+        return 0.0f;
+    }
+    return 2.0f * sin(x * 0.1f) * cos(z * 0.1f);
+}
+
+glm::vec3 Terrain::calculateNormal(int x, int z) {
+    float heightL = getHeight(x-1, z);
+    float heightR = getHeight(x+1, z);
+    float heightD = getHeight(x, z-1);
+    float heightU = getHeight(x, z+1);
+
+    glm::vec3 normal(heightL - heightR, 2.0f, heightD - heightU);
+    return glm::normalize(normal);
+}
+
 void Terrain::generateTerrain() {
     // Generate grid vertices
     for (int z = 0; z < height; z++) {
         for (int x = 0; x < width; x++) {
             Vertex vertex;
-            // Scale the terrain to make it more spread out
-            vertex.position = glm::vec3((float)x - width/2.0f, 0.0f, (float)z - height/2.0f);
-            vertex.normal = glm::vec3(0.0f, 1.0f, 0.0f);
+            float xPos = (float)x - width/2.0f;
+            float zPos = (float)z - height/2.0f;
+
+            // Calculate height using sine waves
+            float heightValue = getHeight(x, z);
+
+            vertex.position = glm::vec3(xPos, heightValue, zPos);
+            vertex.normal = calculateNormal(x, z);
             vertex.texCoord = glm::vec2(x / (float)width, z / (float)height);
             vertices.push_back(vertex);
         }

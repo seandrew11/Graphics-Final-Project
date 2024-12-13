@@ -157,7 +157,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=lab1
+CMAKE_PROJECT_NAME:STATIC=ModernCelt
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=C:/Program Files/JetBrains/CLion 2024.2.2/bin/mingw/bin/ranlib.exe
@@ -278,6 +278,15 @@ GLFW_USE_HYBRID_HPG:BOOL=OFF
 //Takes an empty string or 64. Directory where lib will be installed:
 // lib or lib64
 LIB_SUFFIX:STRING=
+
+//Value Computed by CMake
+ModernCelt_BINARY_DIR:STATIC=C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/cmake-build-debug
+
+//Value Computed by CMake
+ModernCelt_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+ModernCelt_SOURCE_DIR:STATIC=C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt
 
 //OpenGL library for win32
 OPENGL_gl_LIBRARY:STRING=opengl32

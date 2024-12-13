@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(lab1)
+project(ModernCelt)
 
 find_package(OpenGL REQUIRED)
 set(CMAKE_CXX_STANDARD 11)
@@ -10,20 +10,18 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}")
 add_subdirectory(external)
 
 include_directories(
-	external/glfw-3.1.2/include/
-	external/glm-0.9.7.1/
-	external/glad-opengl-3.3/include/
-	lab1/
+		external/glfw-3.1.2/include/
+		external/glm-0.9.7.1/
+		external/glad-opengl-3.3/include/  # Match the working project's path
+		project/
 )
 
 add_executable(main
-	project/main.cpp
-		project/main.cpp
 		project/main.cpp
 )
+
 target_link_libraries(main
-	${OPENGL_LIBRARY}
-	glfw
+		${OPENGL_LIBRARY}
+		glfw
+		glad  # Add this line to link against glad
 )
-
-

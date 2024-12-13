@@ -903,7 +903,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "lab1"
+			"value" : "ModernCelt"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -1464,6 +1464,42 @@
 			],
 			"type" : "STRING",
 			"value" : ""
+		},
+		{
+			"name" : "ModernCelt_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/cmake-build-debug"
+		},
+		{
+			"name" : "ModernCelt_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "ON"
+		},
+		{
+			"name" : "ModernCelt_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt"
 		},
 		{
 			"name" : "OPENGL_gl_LIBRARY",

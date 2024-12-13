@@ -98,7 +98,7 @@
 						0,
 						1
 					],
-					"name" : "lab1",
+					"name" : "ModernCelt",
 					"targetIndexes" : 
 					[
 						2
@@ -149,7 +149,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "main::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-main-Debug-f5cfdcbf1eca7a5e4c07.json",
+					"jsonFile" : "target-main-Debug-ac8ce92519d58fc45801.json",
 					"name" : "main",
 					"projectIndex" : 0
 				}

@@ -35,7 +35,7 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 24,
+				"line" : 23,
 				"parent" : 0
 			},
 			{
@@ -71,7 +71,11 @@
 				},
 				{
 					"backtrace" : 3,
-					"path" : "C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/lab1"
+					"path" : "C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/project"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/external/glad-3.3/include"
 				}
 			],
 			"language" : "CXX",
@@ -91,6 +95,10 @@
 	],
 	"dependencies" : 
 	[
+		{
+			"backtrace" : 2,
+			"id" : "glad::@df5e3ce796715454c4bb"
+		},
 		{
 			"backtrace" : 2,
 			"id" : "glfw::@160694664b387c03da1c"
@@ -122,6 +130,11 @@
 			{
 				"backtrace" : 2,
 				"fragment" : "glfw3dll.a",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "libglad.dll.a",
 				"role" : "libraries"
 			},
 			{

@@ -1,0 +1,20 @@
+# ninja log v6
+36	5010	7557890805950686	external/glfw-3.1.2/src/CMakeFiles/glfw.dir/init.c.obj	47879f3a54d3a570
+73	5078	7557890806330201	external/glfw-3.1.2/src/CMakeFiles/glfw.dir/win32_init.c.obj	ec33f7d4942b8667
+3309	4880	7557896706726719	lab1_window.exe	8ca726d29fc931a4
+56	5027	7557890806157237	external/glfw-3.1.2/src/CMakeFiles/glfw.dir/monitor.c.obj	ea98084c42de6340
+46	5156	7557890806056193	external/glfw-3.1.2/src/CMakeFiles/glfw.dir/input.c.obj	439b5bf4901e1fbc
+5028	7814	7557890855879013	external/glfw-3.1.2/src/CMakeFiles/glfw.dir/win32_time.c.obj	7fb8ed4246a5c975
+23	5304	7557890805828506	external/glfw-3.1.2/src/CMakeFiles/glfw.dir/context.c.obj	b5afdfa2b7b3fd13
+64	5364	7557890806238271	external/glfw-3.1.2/src/CMakeFiles/glfw.dir/window.c.obj	54b4f714c51e5c98
+5018	7639	7557890855777819	external/glfw-3.1.2/src/CMakeFiles/glfw.dir/win32_monitor.c.obj	65fc7a4dab7fe773
+5078	7911	7557890856378430	external/glfw-3.1.2/src/CMakeFiles/glfw.dir/win32_tls.c.obj	553e1d93c896cc93
+5305	8197	7557890858641846	external/glfw-3.1.2/src/CMakeFiles/glfw.dir/winmm_joystick.c.obj	49062198fb96e1f5
+5364	8242	7557890859243504	external/glfw-3.1.2/src/CMakeFiles/glfw.dir/wgl_context.c.obj	8199548b2317e86f
+5156	8280	7557890857165748	external/glfw-3.1.2/src/CMakeFiles/glfw.dir/win32_window.c.obj	8147005d43b414a7
+8281	8691	7557890892318983	glfw3.dll	1008916fce49b5ee
+8281	8691	7557890892318983	glfw3dll.a	1008916fce49b5ee
+7640	11077	7557890881994743	CMakeFiles/lab1_window.dir/lab1/lab1_window.cpp.obj	e461742e69ecebc8
+39	894	7557898434284082	build.ninja	ab08d495b5853d4b
+100	3307	7557896674641307	CMakeFiles/lab1_window.dir/project/lab1_window.cpp.obj	e31e993a029a294c
+6	519	7557898434284082	build.ninja	ab08d495b5853d4b

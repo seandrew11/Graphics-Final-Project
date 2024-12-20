@@ -226,6 +226,30 @@ project/Terrain.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/project/Terrain.cpp.s
 .PHONY : project/Terrain.cpp.s
 
+project/Tree.obj: project/Tree.cpp.obj
+.PHONY : project/Tree.obj
+
+# target to build an object file
+project/Tree.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/project/Tree.cpp.obj
+.PHONY : project/Tree.cpp.obj
+
+project/Tree.i: project/Tree.cpp.i
+.PHONY : project/Tree.i
+
+# target to preprocess a source file
+project/Tree.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/project/Tree.cpp.i
+.PHONY : project/Tree.cpp.i
+
+project/Tree.s: project/Tree.cpp.s
+.PHONY : project/Tree.s
+
+# target to generate assembly for a file
+project/Tree.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/project/Tree.cpp.s
+.PHONY : project/Tree.cpp.s
+
 project/main.obj: project/main.cpp.obj
 .PHONY : project/main.obj
 
@@ -294,6 +318,9 @@ help:
 	@echo ... project/Terrain.obj
 	@echo ... project/Terrain.i
 	@echo ... project/Terrain.s
+	@echo ... project/Tree.obj
+	@echo ... project/Tree.i
+	@echo ... project/Tree.s
 	@echo ... project/main.obj
 	@echo ... project/main.i
 	@echo ... project/main.s

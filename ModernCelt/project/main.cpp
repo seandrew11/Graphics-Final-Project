@@ -7,6 +7,11 @@
 #include "Skybox.h"
 #include "Terrain.h"
 #include "render/shader.h"
+#include "Tree.h"
+#include <vector>
+#include <cstdlib>
+#include <ctime>
+
 #include "stb_image.h"
 
 // Global Variables
@@ -16,7 +21,7 @@ GLFWwindow* window;
 // View control variables
 static float viewAzimuth = 0.f;
 static float viewPolar = 0.f;
-static float viewDistance = 300.0f;
+static float viewDistance = 50.0f;
 static glm::vec3 eye_center;
 static glm::vec3 lookat(0, 0, 0);
 static glm::vec3 up(0, 1, 0);
@@ -58,6 +63,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         glfwSetWindowShouldClose(window, GL_TRUE);
     }
 }
+
 
 // Main function
 int main() {
@@ -105,9 +111,16 @@ int main() {
     GLuint terrainSampler = glGetUniformLocation(shaderProgram, "terrainTexture");
     terrain.setTexture(terrainTexture, terrainSampler);
 
-    GLuint buildingTexture = LoadTextureTileBox("../project/textures/facade2.jpg");
-    Building building;
-    building.initialize(glm::vec3(0.0f, 6.0f, 0.0f), glm::vec3(5.0f, 40.0f, 5.0f), buildingTexture);
+    GLuint buildingTexture1 = LoadTextureTileBox("../project/textures/facade1.jpg");
+    GLuint buildingTexture2 = LoadTextureTileBox("../project/textures/facade3.jpg");
+
+    Building building, pub;
+    building.initialize(glm::vec3(0.0f, 6.0f, 0.0f), glm::vec3(5.0f, 40.0f, 5.0f), buildingTexture1);
+    pub.initialize(glm::vec3(15.0f, 3.0f, -25.0f), glm::vec3(5.0f, 10.0f, 5.0f), buildingTexture2);
+
+    // Initialize a tree
+    Tree tree;
+    tree.initialize(glm::vec3(20.0f, 0.0f, 20.0f), glm::vec3(1.0f, 5.0f, 1.0f), 2.0f);
 
     // Camera setup
     eye_center = glm::vec3(viewDistance * cos(viewAzimuth), viewDistance * cos(viewPolar), viewDistance * sin(viewAzimuth));
@@ -128,6 +141,10 @@ int main() {
 
         terrain.render();
         building.render(mvpMatrix);
+        pub.render(mvpMatrix);
+
+        // Render the tree
+        tree.render(mvpMatrix);
 
         glDepthMask(GL_FALSE);  // Disable depth writing
         skybox.render(mvp);
@@ -140,6 +157,8 @@ int main() {
     // Cleanup
     skybox.cleanup();
     building.cleanup();
+    pub.cleanup();
+    tree.cleanup();
     glfwTerminate();
 
     return 0;

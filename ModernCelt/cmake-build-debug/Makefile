@@ -154,6 +154,30 @@ glfw/fast:
 	$(MAKE) $(MAKESILENT) -f external\glfw-3.1.2\src\CMakeFiles\glfw.dir\build.make external/glfw-3.1.2/src/CMakeFiles/glfw.dir/build
 .PHONY : glfw/fast
 
+project/Building.obj: project/Building.cpp.obj
+.PHONY : project/Building.obj
+
+# target to build an object file
+project/Building.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/project/Building.cpp.obj
+.PHONY : project/Building.cpp.obj
+
+project/Building.i: project/Building.cpp.i
+.PHONY : project/Building.i
+
+# target to preprocess a source file
+project/Building.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/project/Building.cpp.i
+.PHONY : project/Building.cpp.i
+
+project/Building.s: project/Building.cpp.s
+.PHONY : project/Building.s
+
+# target to generate assembly for a file
+project/Building.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/project/Building.cpp.s
+.PHONY : project/Building.cpp.s
+
 project/Terrain.obj: project/Terrain.cpp.obj
 .PHONY : project/Terrain.obj
 
@@ -237,6 +261,9 @@ help:
 	@echo ... glad
 	@echo ... glfw
 	@echo ... main
+	@echo ... project/Building.obj
+	@echo ... project/Building.i
+	@echo ... project/Building.s
 	@echo ... project/Terrain.obj
 	@echo ... project/Terrain.i
 	@echo ... project/Terrain.s

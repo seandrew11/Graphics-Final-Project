@@ -7,12 +7,12 @@
 #include "render/shader.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
-
+#include "Building.h"
 GLFWwindow* window;
 
 static float viewAzimuth = 0.f;
 static float viewPolar = 0.f;
-static float viewDistance = 30.0f;
+static float viewDistance = 100.0f;
 static glm::vec3 eye_center;
 static glm::vec3 lookat(0, 0, 0);
 static glm::vec3 up(0, 1, 0);
@@ -122,10 +122,15 @@ int main(void) {
 
 
     // Create terrain
-    Terrain terrain(50, 50);
+    Terrain terrain(500, 500);
     GLuint terrainTexture = LoadTerrainTexture("../project/textures/Grass_01.png");
     GLuint textureSamplerID = glGetUniformLocation(shaderProgram, "terrainTexture");
     terrain.setTexture(terrainTexture, textureSamplerID);
+
+    std::cout << "Created terrain" << std::endl;
+
+    Building building;
+    building.initialize(glm::vec3(0.0f, 6.0f, 0.0f), glm::vec3(2.0f, 20.0f, 2.0f));
 
     // Camera setup
     eye_center = glm::vec3(viewDistance * cos(viewAzimuth), viewDistance * cos(viewPolar),
@@ -148,6 +153,10 @@ int main(void) {
         // Render terrain
         terrain.render();
 
+        building.render(MVP);
+
+
+
         glfwSwapBuffers(window);
         glfwPollEvents();
 
@@ -156,6 +165,8 @@ int main(void) {
     // Cleanup
     glDeleteProgram(shaderProgram);
     glfwTerminate();
+
+    building.cleanup();
 
     return 0;
 }

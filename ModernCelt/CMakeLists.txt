@@ -23,6 +23,8 @@ add_executable(main
 		project/Terrain.cpp
 		project/Terrain.h
 		project/render/shader.cpp
+		project/Building.h
+		project/Building.cpp
 )
 
 target_link_libraries(main

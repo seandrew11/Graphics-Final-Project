@@ -20,6 +20,7 @@ public:
 
     void render();
     void setTexture(GLuint texID, GLuint samplerID);
+    void cleanup();
 
 private:
     GLuint textureID;
@@ -37,7 +38,6 @@ private:
 
     void generateTerrain();
     void setupBuffers();
-    void cleanup();
 
     // Add these two function declarations
     float getHeight(int x, int z);

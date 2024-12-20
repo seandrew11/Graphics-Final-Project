@@ -1,14 +1,24 @@
-// box.vert
 #version 330 core
 
-layout(location = 0) in vec3 position;  // Changed from vertexPosition
-layout(location = 1) in vec3 color;    // Changed from vertexColor
+// Input
+layout(location = 0) in vec3 vertexPosition;
+layout(location = 1) in vec3 vertexColor;
+layout(location = 2) in vec2 vertexUV; // Add UV input to the vertex shader
 
+// Output data, to be interpolated for each fragment
+out vec3 color;
+out vec2 UV; // Output UV to the fragment shader
+
+// Matrix for vertex transformation
 uniform mat4 MVP;
 
-out vec3 fragmentColor;
-
 void main() {
-    gl_Position = MVP * vec4(position, 1.0);
-    fragmentColor = color;
+    // Transform vertex
+    gl_Position = MVP * vec4(vertexPosition, 1);
+
+    // Pass vertex color to the fragment shader
+    color = vertexColor;
+
+    // Pass UV to the fragment shader
+    UV = vertexUV; // Assign the input UV to the output UV
 }

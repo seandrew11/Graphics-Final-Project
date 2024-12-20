@@ -1,9 +1,20 @@
-// box.frag
 #version 330 core
 
-in vec3 fragmentColor;
-out vec4 color;  // Changed to vec4
+// Input data from the vertex shader
+in vec3 color;
+in vec2 UV; // Add UV input to the fragment shader
 
-void main() {
-    color = vec4(fragmentColor, 1.0);  // Added alpha channel
+// Texture sampler
+uniform sampler2D textureSampler; // Add the texture sampler
+
+// Output color
+out vec3 finalColor;
+
+void main()
+{
+    // Perform a texture lookup using the UV coordinates
+    vec3 textureColor = texture(textureSampler, UV).rgb;
+
+    // Combine the texture color with the vertex color
+    finalColor = textureColor * color;
 }

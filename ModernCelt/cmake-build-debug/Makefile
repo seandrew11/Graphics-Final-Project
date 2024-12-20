@@ -178,6 +178,30 @@ project/Building.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/project/Building.cpp.s
 .PHONY : project/Building.cpp.s
 
+project/Skybox.obj: project/Skybox.cpp.obj
+.PHONY : project/Skybox.obj
+
+# target to build an object file
+project/Skybox.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/project/Skybox.cpp.obj
+.PHONY : project/Skybox.cpp.obj
+
+project/Skybox.i: project/Skybox.cpp.i
+.PHONY : project/Skybox.i
+
+# target to preprocess a source file
+project/Skybox.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/project/Skybox.cpp.i
+.PHONY : project/Skybox.cpp.i
+
+project/Skybox.s: project/Skybox.cpp.s
+.PHONY : project/Skybox.s
+
+# target to generate assembly for a file
+project/Skybox.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/project/Skybox.cpp.s
+.PHONY : project/Skybox.cpp.s
+
 project/Terrain.obj: project/Terrain.cpp.obj
 .PHONY : project/Terrain.obj
 
@@ -264,6 +288,9 @@ help:
 	@echo ... project/Building.obj
 	@echo ... project/Building.i
 	@echo ... project/Building.s
+	@echo ... project/Skybox.obj
+	@echo ... project/Skybox.i
+	@echo ... project/Skybox.s
 	@echo ... project/Terrain.obj
 	@echo ... project/Terrain.i
 	@echo ... project/Terrain.s

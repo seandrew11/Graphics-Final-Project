@@ -25,6 +25,8 @@ add_executable(main
 		project/render/shader.cpp
 		project/Building.h
 		project/Building.cpp
+		project/Skybox.h
+		project/Skybox.cpp
 )
 
 target_link_libraries(main

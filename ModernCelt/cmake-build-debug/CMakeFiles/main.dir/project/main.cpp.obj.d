@@ -431,4 +431,5 @@ CMakeFiles/main.dir/project/main.cpp.obj: \
  C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/locale_facets_nonio.tcc \
  C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/locale_conv.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/quoted_string.h \
+ C:\Users\sandr\Desktop\College\Computer\ Graphics\Graphics-Final-Project\ModernCelt\project\IrishPub.h \
  C:/Users/sandr/Desktop/College/COMPUT~1/GRAPHI~1/MODERN~1/external/stb/stb_image.h

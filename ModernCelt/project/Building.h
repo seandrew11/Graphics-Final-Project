@@ -16,8 +16,6 @@ public:
     void initialize(glm::vec3 position, glm::vec3 scale, GLuint textureID);
     void render(glm::mat4 cameraMatrix);
     void cleanup();
-
-private:
     static const GLfloat vertex_buffer_data[72];  // Vertex data for a box
     static const GLfloat color_buffer_data[72];   // Color data for each vertex
     static const GLuint index_buffer_data[36];    // Indices for the box faces
@@ -35,6 +33,7 @@ private:
     GLuint mvpMatrixID;
     GLuint textureSamplerID;
     GLuint programID;
+
 };
 
 GLuint LoadTextureTileBox(const char *texture_file_path); // Helper function to load textures

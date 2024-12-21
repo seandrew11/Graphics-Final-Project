@@ -30,6 +30,7 @@ add_executable(main
 		project/Skybox.cpp
 		project/Character.h
 		project/Character.cpp
+		project/IrishPub.h
 )
 
 target_link_libraries(main

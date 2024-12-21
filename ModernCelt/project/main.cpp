@@ -9,6 +9,7 @@
 #include "Terrain.h"
 #include "render/shader.h"
 #include "Character.h"
+#include "IrishPub.h"
 #include "stb_image.h"
 
 // Global Variables
@@ -104,15 +105,17 @@ int main() {
     terrain.setTexture(terrainTexture, terrainSampler);
 
     GLuint buildingTexture1 = LoadTextureTileBox("../project/textures/alien2.jpg");
-    GLuint buildingTexture2 = LoadTextureTileBox("../project/textures/facade3.jpg");
+    GLuint pubside = LoadTextureTileBox("../project/textures/facade3.jpg");
+    GLuint pubfront = LoadTextureTileBox("../project/textures/pub1.jpg");
 
     MyBot character1, character2;
     character1.initialize();
     character2.initialize();
 
-    Building building, pub;
+    Building building;
+    IrishPub pub;
     building.initialize(glm::vec3(0.0f, 6.0f, 0.0f), glm::vec3(5.0f, 40.0f, 5.0f), buildingTexture1);
-    pub.initialize(glm::vec3(-10.0f, 3.0f, -35.0f), glm::vec3(12.0f, 16.0f, 5.0f), buildingTexture2);
+    pub.initialize(glm::vec3(-10.0f, 3.0f, -35.0f), glm::vec3(12.0f, 16.0f, 5.0f), pubfront, pubside);
 
     glm::mat4 projectionMatrix = glm::perspective(glm::radians(60.0f), 1024.0f / 768.0f, 0.1f, 1000.0f);
 

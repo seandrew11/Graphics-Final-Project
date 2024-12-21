@@ -5,8 +5,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/main.dir/project/Skybox.cpp.obj.d"
   "CMakeFiles/main.dir/project/Terrain.cpp.obj"
   "CMakeFiles/main.dir/project/Terrain.cpp.obj.d"
-  "CMakeFiles/main.dir/project/Tree.cpp.obj"
-  "CMakeFiles/main.dir/project/Tree.cpp.obj.d"
   "CMakeFiles/main.dir/project/main.cpp.obj"
   "CMakeFiles/main.dir/project/main.cpp.obj.d"
   "CMakeFiles/main.dir/project/render/shader.cpp.obj"

@@ -27,8 +27,6 @@ add_executable(main
 		project/Building.cpp
 		project/Skybox.h
 		project/Skybox.cpp
-		project/Tree.h
-		project/Tree.cpp
 )
 
 target_link_libraries(main

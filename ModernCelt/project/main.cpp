@@ -7,7 +7,6 @@
 #include "Skybox.h"
 #include "Terrain.h"
 #include "render/shader.h"
-#include "Tree.h"
 #include <vector>
 #include <cstdlib>
 #include <ctime>
@@ -118,10 +117,6 @@ int main() {
     building.initialize(glm::vec3(0.0f, 6.0f, 0.0f), glm::vec3(5.0f, 40.0f, 5.0f), buildingTexture1);
     pub.initialize(glm::vec3(15.0f, 3.0f, -25.0f), glm::vec3(5.0f, 10.0f, 5.0f), buildingTexture2);
 
-    // Initialize a tree
-    Tree tree;
-    tree.initialize(glm::vec3(20.0f, 0.0f, 20.0f), glm::vec3(1.0f, 5.0f, 1.0f), 2.0f);
-
     // Camera setup
     eye_center = glm::vec3(viewDistance * cos(viewAzimuth), viewDistance * cos(viewPolar), viewDistance * sin(viewAzimuth));
     glm::mat4 projectionMatrix = glm::perspective(glm::radians(60.0f), 1024.0f / 768.0f, 0.1f, 1000.0f);
@@ -143,8 +138,6 @@ int main() {
         building.render(mvpMatrix);
         pub.render(mvpMatrix);
 
-        // Render the tree
-        tree.render(mvpMatrix);
 
         glDepthMask(GL_FALSE);  // Disable depth writing
         skybox.render(mvp);
@@ -158,7 +151,6 @@ int main() {
     skybox.cleanup();
     building.cleanup();
     pub.cleanup();
-    tree.cleanup();
     glfwTerminate();
 
     return 0;

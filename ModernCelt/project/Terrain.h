@@ -21,6 +21,7 @@ public:
     void render();
     void setTexture(GLuint texID, GLuint samplerID);
     void cleanup();
+    float getHeight(int x, int z);
 
 private:
     GLuint textureID;
@@ -40,6 +41,5 @@ private:
     void setupBuffers();
 
     // Add these two function declarations
-    float getHeight(int x, int z);
     glm::vec3 calculateNormal(int x, int z);
 };

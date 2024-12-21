@@ -24,6 +24,12 @@ struct MyBot {
     GLuint lightIntensityID;
     GLuint programID;
 
+    glm::vec3 lightIntensity;
+    glm::vec3 lightPosition;
+
+    MyBot() : lightIntensity(5e6f, 5e6f, 5e6f),
+             lightPosition(-275.0f, 500.0f, 800.0f) {}
+
     tinygltf::Model model;
 
     float loopStartTime = 0.5f;  // Example default value

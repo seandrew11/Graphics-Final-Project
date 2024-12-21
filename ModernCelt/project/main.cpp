@@ -1,4 +1,4 @@
-/*
+
  #include <glad/gl.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
@@ -18,6 +18,12 @@
 // Global Variables
 
 GLFWwindow* window;
+
+static bool playAnimation = true;
+static float playbackSpeed = 2.0f;
+static float characterTime = 0.0f;
+
+static double lastTime = glfwGetTime();
 
 // View control variables
 static float viewAzimuth = 0.f;
@@ -115,6 +121,10 @@ int main() {
     GLuint buildingTexture1 = LoadTextureTileBox("../project/textures/facade1.jpg");
     GLuint buildingTexture2 = LoadTextureTileBox("../project/textures/facade3.jpg");
 
+    MyBot character1, character2;
+    character1.initialize();
+    character2.initialize();
+
 
 
     Building building, pub;
@@ -141,6 +151,30 @@ int main() {
         terrain.render();
         building.render(mvpMatrix);
         pub.render(mvpMatrix);
+        // Inside main loop, before animation update
+        double currentTime = glfwGetTime();
+        float deltaTime = float(currentTime - lastTime);
+        lastTime = currentTime;
+
+        if (playAnimation) {
+            characterTime += deltaTime * playbackSpeed;
+            character1.update(characterTime);
+            character2.update(characterTime);
+        }
+        glm::mat4 characterModelMatrix = glm::translate(glm::mat4(1.0f),
+         glm::vec3(-15.0f, terrain.getHeight(-50 + 250, -50+ 250), -15.0f));
+        characterModelMatrix = glm::rotate(characterModelMatrix, glm::radians(45.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        characterModelMatrix = glm::scale(characterModelMatrix, glm::vec3(0.05f));
+        glm::mat4 characterMVP = mvpMatrix * characterModelMatrix;
+        character1.render(characterMVP);
+
+        // Second character (offset position)
+        glm::mat4 characterModelMatrix2 = glm::translate(glm::mat4(1.0f),
+            glm::vec3(-9.0f, terrain.getHeight(-50 + 250, -50 + 250), -15.0f));  // offset X by 3 units
+        characterModelMatrix2 = glm::rotate(characterModelMatrix2, glm::radians(45.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        characterModelMatrix2 = glm::scale(characterModelMatrix2, glm::vec3(0.05f));
+        glm::mat4 characterMVP2 = mvpMatrix * characterModelMatrix2;
+        character2.render(characterMVP2);
 
 
         glDepthMask(GL_FALSE);  // Disable depth writing
@@ -155,8 +189,9 @@ int main() {
     skybox.cleanup();
     building.cleanup();
     pub.cleanup();
+    character1.cleanup();
+    character2.cleanup();
     glfwTerminate();
 
     return 0;
 }
-*/

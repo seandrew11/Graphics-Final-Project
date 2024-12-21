@@ -1,4 +1,5 @@
-#include <glad/gl.h>
+/*
+ #include <glad/gl.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -7,6 +8,7 @@
 #include "Skybox.h"
 #include "Terrain.h"
 #include "render/shader.h"
+#include "Character.h"
 #include <vector>
 #include <cstdlib>
 #include <ctime>
@@ -113,6 +115,8 @@ int main() {
     GLuint buildingTexture1 = LoadTextureTileBox("../project/textures/facade1.jpg");
     GLuint buildingTexture2 = LoadTextureTileBox("../project/textures/facade3.jpg");
 
+
+
     Building building, pub;
     building.initialize(glm::vec3(0.0f, 6.0f, 0.0f), glm::vec3(5.0f, 40.0f, 5.0f), buildingTexture1);
     pub.initialize(glm::vec3(15.0f, 3.0f, -25.0f), glm::vec3(5.0f, 10.0f, 5.0f), buildingTexture2);
@@ -155,3 +159,4 @@ int main() {
 
     return 0;
 }
+*/

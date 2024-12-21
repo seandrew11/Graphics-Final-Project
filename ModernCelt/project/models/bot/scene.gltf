@@ -1,0 +1,837 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 50362,
+      "max": [
+        30329.58984375,
+        76185.4140625,
+        6925.705078125
+      ],
+      "min": [
+        -30645.193359375,
+        -0.02609538845717907,
+        -8256.1455078125
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 604344,
+      "componentType": 5126,
+      "count": 50362,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 50362,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 4,
+      "componentType": 5123,
+      "count": 50362,
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 50362,
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 205329,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 5,
+      "componentType": 5126,
+      "count": 39,
+      "type": "MAT4"
+    }
+  ],
+  "asset": {
+    "generator": "fab-model-conversion",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 821316,
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 402896,
+      "byteOffset": 821316,
+      "byteStride": 8,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 1208688,
+      "byteOffset": 1224212,
+      "byteStride": 12,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 805792,
+      "byteOffset": 2432900,
+      "byteStride": 16,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 402896,
+      "byteOffset": 3238692,
+      "byteStride": 8,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 2496,
+      "byteOffset": 3641588
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 3644084,
+      "uri": "scene.bin"
+    }
+  ],
+  "images": [
+    {
+      "uri": "textures/Tony.001_baseColor.png"
+    },
+    {
+      "uri": "textures/Tony.001_metallicRoughness.png"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "Tony.001",
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicFactor": 0.0,
+        "metallicRoughnessTexture": {
+          "index": 1
+        }
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "0",
+      "primitives": [
+        {
+          "attributes": {
+            "JOINTS_0": 3,
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TEXCOORD_0": 2,
+            "WEIGHTS_0": 4
+          },
+          "indices": 5,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1,
+        98
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.220446049250313e-16,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        2.220446049250313e-16,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "matrix": [
+        0.009999999776482582,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.009999999776482582,
+        0.0,
+        0.0,
+        -0.009999999776482582,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "d9edb38055ec490bb423c7c935d022f2.fbx"
+    },
+    {
+      "children": [
+        3
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        4
+      ],
+      "matrix": [
+        0.8912836909294128,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -2.5145784023887716e-07,
+        -0.8912836909293774,
+        0.0,
+        0.0,
+        0.8912836909293774,
+        -2.5145784023887716e-07,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "root"
+    },
+    {
+      "children": [
+        5,
+        86,
+        91,
+        97
+      ],
+      "name": "Object_4"
+    },
+    {
+      "children": [
+        6,
+        68,
+        77
+      ],
+      "name": "pelvis_01"
+    },
+    {
+      "children": [
+        7
+      ],
+      "name": "spine_01_02"
+    },
+    {
+      "children": [
+        8
+      ],
+      "name": "spine_02_03"
+    },
+    {
+      "children": [
+        9,
+        37,
+        65
+      ],
+      "name": "spine_03_04"
+    },
+    {
+      "children": [
+        10
+      ],
+      "name": "clavicle_l_05"
+    },
+    {
+      "children": [
+        11,
+        35
+      ],
+      "name": "upperarm_l_06"
+    },
+    {
+      "children": [
+        12,
+        33
+      ],
+      "name": "lowerarm_l_07"
+    },
+    {
+      "children": [
+        13,
+        17,
+        21,
+        25,
+        29
+      ],
+      "name": "hand_l_08"
+    },
+    {
+      "children": [
+        14
+      ],
+      "name": "index_01_l_09"
+    },
+    {
+      "children": [
+        15
+      ],
+      "name": "index_02_l_010"
+    },
+    {
+      "children": [
+        16
+      ],
+      "name": "index_03_l_011"
+    },
+    {
+      "name": "index_03_l_end_067"
+    },
+    {
+      "children": [
+        18
+      ],
+      "name": "middle_01_l_012"
+    },
+    {
+      "children": [
+        19
+      ],
+      "name": "middle_02_l_013"
+    },
+    {
+      "children": [
+        20
+      ],
+      "name": "middle_03_l_014"
+    },
+    {
+      "name": "middle_03_l_end_068"
+    },
+    {
+      "children": [
+        22
+      ],
+      "name": "pinky_01_l_015"
+    },
+    {
+      "children": [
+        23
+      ],
+      "name": "pinky_02_l_016"
+    },
+    {
+      "children": [
+        24
+      ],
+      "name": "pinky_03_l_017"
+    },
+    {
+      "name": "pinky_03_l_end_069"
+    },
+    {
+      "children": [
+        26
+      ],
+      "name": "ring_01_l_018"
+    },
+    {
+      "children": [
+        27
+      ],
+      "name": "ring_02_l_019"
+    },
+    {
+      "children": [
+        28
+      ],
+      "name": "ring_03_l_020"
+    },
+    {
+      "name": "ring_03_l_end_070"
+    },
+    {
+      "children": [
+        30
+      ],
+      "name": "thumb_01_l_021"
+    },
+    {
+      "children": [
+        31
+      ],
+      "name": "thumb_02_l_022"
+    },
+    {
+      "children": [
+        32
+      ],
+      "name": "thumb_03_l_023"
+    },
+    {
+      "name": "thumb_03_l_end_071"
+    },
+    {
+      "children": [
+        34
+      ],
+      "name": "lowerarm_twist_01_l_024"
+    },
+    {
+      "name": "lowerarm_twist_01_l_end_072"
+    },
+    {
+      "children": [
+        36
+      ],
+      "name": "upperarm_twist_01_l_025"
+    },
+    {
+      "name": "upperarm_twist_01_l_end_073"
+    },
+    {
+      "children": [
+        38
+      ],
+      "name": "clavicle_r_026"
+    },
+    {
+      "children": [
+        39,
+        63
+      ],
+      "name": "upperarm_r_027"
+    },
+    {
+      "children": [
+        40,
+        61
+      ],
+      "name": "lowerarm_r_028"
+    },
+    {
+      "children": [
+        41,
+        45,
+        49,
+        53,
+        57
+      ],
+      "name": "hand_r_029"
+    },
+    {
+      "children": [
+        42
+      ],
+      "name": "index_01_r_030"
+    },
+    {
+      "children": [
+        43
+      ],
+      "name": "index_02_r_031"
+    },
+    {
+      "children": [
+        44
+      ],
+      "name": "index_03_r_00"
+    },
+    {
+      "name": "index_03_r_end_074"
+    },
+    {
+      "children": [
+        46
+      ],
+      "name": "middle_01_r_032"
+    },
+    {
+      "children": [
+        47
+      ],
+      "name": "middle_02_r_033"
+    },
+    {
+      "children": [
+        48
+      ],
+      "name": "middle_03_r_034"
+    },
+    {
+      "name": "middle_03_r_end_075"
+    },
+    {
+      "children": [
+        50
+      ],
+      "name": "pinky_01_r_035"
+    },
+    {
+      "children": [
+        51
+      ],
+      "name": "pinky_02_r_036"
+    },
+    {
+      "children": [
+        52
+      ],
+      "name": "pinky_03_r_037"
+    },
+    {
+      "name": "pinky_03_r_end_076"
+    },
+    {
+      "children": [
+        54
+      ],
+      "name": "ring_01_r_038"
+    },
+    {
+      "children": [
+        55
+      ],
+      "name": "ring_02_r_039"
+    },
+    {
+      "children": [
+        56
+      ],
+      "name": "ring_03_r_040"
+    },
+    {
+      "name": "ring_03_r_end_077"
+    },
+    {
+      "children": [
+        58
+      ],
+      "name": "thumb_01_r_041"
+    },
+    {
+      "children": [
+        59
+      ],
+      "name": "thumb_02_r_042"
+    },
+    {
+      "children": [
+        60
+      ],
+      "name": "thumb_03_r_043"
+    },
+    {
+      "name": "thumb_03_r_end_078"
+    },
+    {
+      "children": [
+        62
+      ],
+      "name": "lowerarm_twist_01_r_044"
+    },
+    {
+      "name": "lowerarm_twist_01_r_end_079"
+    },
+    {
+      "children": [
+        64
+      ],
+      "name": "upperarm_twist_01_r_045"
+    },
+    {
+      "name": "upperarm_twist_01_r_end_080"
+    },
+    {
+      "children": [
+        66
+      ],
+      "name": "neck_01_046"
+    },
+    {
+      "children": [
+        67
+      ],
+      "name": "head_047"
+    },
+    {
+      "name": "head_end_081"
+    },
+    {
+      "children": [
+        69,
+        75
+      ],
+      "name": "thigh_l_048"
+    },
+    {
+      "children": [
+        70,
+        72
+      ],
+      "name": "calf_l_049"
+    },
+    {
+      "children": [
+        71
+      ],
+      "name": "calf_twist_01_l_050"
+    },
+    {
+      "name": "calf_twist_01_l_end_082"
+    },
+    {
+      "children": [
+        73
+      ],
+      "name": "foot_l_051"
+    },
+    {
+      "children": [
+        74
+      ],
+      "name": "ball_l_052"
+    },
+    {
+      "name": "ball_l_end_083"
+    },
+    {
+      "children": [
+        76
+      ],
+      "name": "thigh_twist_01_l_053"
+    },
+    {
+      "name": "thigh_twist_01_l_end_084"
+    },
+    {
+      "children": [
+        78,
+        84
+      ],
+      "name": "thigh_r_054"
+    },
+    {
+      "children": [
+        79,
+        81
+      ],
+      "name": "calf_r_055"
+    },
+    {
+      "children": [
+        80
+      ],
+      "name": "calf_twist_01_r_056"
+    },
+    {
+      "name": "calf_twist_01_r_end_085"
+    },
+    {
+      "children": [
+        82
+      ],
+      "name": "foot_r_057"
+    },
+    {
+      "children": [
+        83
+      ],
+      "name": "ball_r_058"
+    },
+    {
+      "name": "ball_r_end_086"
+    },
+    {
+      "children": [
+        85
+      ],
+      "name": "thigh_twist_01_r_059"
+    },
+    {
+      "name": "thigh_twist_01_r_end_087"
+    },
+    {
+      "children": [
+        87,
+        89
+      ],
+      "name": "ik_foot_root_060"
+    },
+    {
+      "children": [
+        88
+      ],
+      "name": "ik_foot_l_061"
+    },
+    {
+      "name": "ik_foot_l_end_088"
+    },
+    {
+      "children": [
+        90
+      ],
+      "name": "ik_foot_r_062"
+    },
+    {
+      "name": "ik_foot_r_end_089"
+    },
+    {
+      "children": [
+        92
+      ],
+      "name": "ik_hand_root_063"
+    },
+    {
+      "children": [
+        93,
+        95
+      ],
+      "name": "ik_hand_gun_064"
+    },
+    {
+      "children": [
+        94
+      ],
+      "name": "ik_hand_l_065"
+    },
+    {
+      "name": "ik_hand_l_end_090"
+    },
+    {
+      "children": [
+        96
+      ],
+      "name": "ik_hand_r_066"
+    },
+    {
+      "name": "ik_hand_r_end_091"
+    },
+    {
+      "matrix": [
+        0.002081968435646497,
+        3.6379797527977185e-11,
+        7.2759527988796714e-12,
+        0.0,
+        -3.637978411126381e-11,
+        0.0020819677981056975,
+        -6.514017700834313e-10,
+        0.0,
+        -7.275961467065182e-12,
+        6.514017264275558e-10,
+        0.0020819676589819906,
+        0.0,
+        2.2798777586189795e-06,
+        2.6667529525070677e-05,
+        -3.393591635529092,
+        1.0
+      ],
+      "name": "Object_97"
+    },
+    {
+      "mesh": 0,
+      "name": "Object_98",
+      "skin": 0
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "skins": [
+    {
+      "inverseBindMatrices": 6,
+      "joints": [
+        12,
+        15,
+        14,
+        13,
+        31,
+        30,
+        29,
+        40,
+        42,
+        43,
+        41,
+        59,
+        57,
+        58,
+        8,
+        65,
+        66,
+        5,
+        84,
+        9,
+        37,
+        35,
+        6,
+        75,
+        7,
+        11,
+        33,
+        63,
+        61,
+        81,
+        79,
+        78,
+        72,
+        70,
+        69,
+        77,
+        68,
+        73,
+        82
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    }
+  ]
+}

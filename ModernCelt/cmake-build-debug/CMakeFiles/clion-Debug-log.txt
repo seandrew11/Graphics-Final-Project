@@ -36,5 +36,5 @@ CMake Deprecation Warning at external/glfw-3.1.2/CMakeLists.txt:8 (cmake_policy)
 -- Using Win32 for window creation
 -- Using WGL for context creation
 -- Configuring done (0.2s)
--- Generating done (0.2s)
+-- Generating done (0.3s)
 -- Build files have been written to: C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/cmake-build-debug

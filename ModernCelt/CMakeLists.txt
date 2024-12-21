@@ -16,6 +16,7 @@ include_directories(
 		project/
 		project/include/
 		external/stb/
+		external/tinygltf-2.9.3
 )
 
 add_executable(main

@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/project/Building.cpp" "CMakeFiles/main.dir/project/Building.cpp.obj" "gcc" "CMakeFiles/main.dir/project/Building.cpp.obj.d"
+  "C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/project/Character.cpp" "CMakeFiles/main.dir/project/Character.cpp.obj" "gcc" "CMakeFiles/main.dir/project/Character.cpp.obj.d"
   "C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/project/Skybox.cpp" "CMakeFiles/main.dir/project/Skybox.cpp.obj" "gcc" "CMakeFiles/main.dir/project/Skybox.cpp.obj.d"
   "C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/project/Terrain.cpp" "CMakeFiles/main.dir/project/Terrain.cpp.obj" "gcc" "CMakeFiles/main.dir/project/Terrain.cpp.obj.d"
   "C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/project/main.cpp" "CMakeFiles/main.dir/project/main.cpp.obj" "gcc" "CMakeFiles/main.dir/project/main.cpp.obj.d"

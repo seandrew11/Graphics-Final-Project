@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/main.dir/project/Building.cpp.obj"
   "CMakeFiles/main.dir/project/Building.cpp.obj.d"
+  "CMakeFiles/main.dir/project/Character.cpp.obj"
+  "CMakeFiles/main.dir/project/Character.cpp.obj.d"
   "CMakeFiles/main.dir/project/Skybox.cpp.obj"
   "CMakeFiles/main.dir/project/Skybox.cpp.obj.d"
   "CMakeFiles/main.dir/project/Terrain.cpp.obj"

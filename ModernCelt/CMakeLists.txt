@@ -27,6 +27,8 @@ add_executable(main
 		project/Building.cpp
 		project/Skybox.h
 		project/Skybox.cpp
+		project/Character.h
+		project/Character.cpp
 )
 
 target_link_libraries(main

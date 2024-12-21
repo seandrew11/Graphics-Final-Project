@@ -178,6 +178,30 @@ project/Building.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/project/Building.cpp.s
 .PHONY : project/Building.cpp.s
 
+project/Character.obj: project/Character.cpp.obj
+.PHONY : project/Character.obj
+
+# target to build an object file
+project/Character.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/project/Character.cpp.obj
+.PHONY : project/Character.cpp.obj
+
+project/Character.i: project/Character.cpp.i
+.PHONY : project/Character.i
+
+# target to preprocess a source file
+project/Character.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/project/Character.cpp.i
+.PHONY : project/Character.cpp.i
+
+project/Character.s: project/Character.cpp.s
+.PHONY : project/Character.s
+
+# target to generate assembly for a file
+project/Character.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/project/Character.cpp.s
+.PHONY : project/Character.cpp.s
+
 project/Skybox.obj: project/Skybox.cpp.obj
 .PHONY : project/Skybox.obj
 
@@ -288,6 +312,9 @@ help:
 	@echo ... project/Building.obj
 	@echo ... project/Building.i
 	@echo ... project/Building.s
+	@echo ... project/Character.obj
+	@echo ... project/Character.i
+	@echo ... project/Character.s
 	@echo ... project/Skybox.obj
 	@echo ... project/Skybox.i
 	@echo ... project/Skybox.s

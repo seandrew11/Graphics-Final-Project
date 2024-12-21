@@ -23,7 +23,7 @@ static void key_callback(GLFWwindow *window, int key, int scancode, int action, 
 static glm::vec3 eye_center(0.0f, 100.0f, 300.0f);
 static glm::vec3 lookat(0.0f, 0.0f, 0.0f);
 static glm::vec3 up(0.0f, 1.0f, 0.0f);
-static float FoV = 45.0f;
+static float FoV = 100.0f;
 static float zNear = 100.0f;
 static float zFar = 1500.0f;
 
@@ -34,6 +34,77 @@ static glm::vec3 lightPosition(-275.0f, 500.0f, 800.0f);
 // Animation
 static bool playAnimation = true;
 static float playbackSpeed = 2.0f;
+
+GLuint MyBot::loadTexture(const tinygltf::Image& image) {
+    GLuint textureID;
+    glGenTextures(1, &textureID);
+    glBindTexture(GL_TEXTURE_2D, textureID);
+
+    GLenum format = GL_RGBA;
+    if (image.component == 3) {
+        format = GL_RGB;
+    }
+
+
+
+
+    glTexImage2D(GL_TEXTURE_2D, 0, format, image.width, image.height, 0, format, GL_UNSIGNED_BYTE, &image.image[0]);
+
+    // Set texture parameters
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    glGenerateMipmap(GL_TEXTURE_2D);
+
+    return textureID;
+}
+
+void MyBot::loadMaterialTextures(const tinygltf::Model& model, const tinygltf::Material& material) {
+    // Load diffuse/base color texture
+    if (material.values.find("baseColorTexture") != material.values.end()) {
+        int textureIndex = material.values.at("baseColorTexture").TextureIndex();
+        const tinygltf::Texture& texture = model.textures[textureIndex];
+        const tinygltf::Image& image = model.images[texture.source];
+
+        TextureObject texObj;
+        texObj.id = loadTexture(image);
+        texObj.width = image.width;
+        texObj.height = image.height;
+        texObj.channels = image.component;
+        texObj.type = "diffuse";
+        textureObjects.push_back(texObj);
+    }
+
+    // Load normal texture
+    if (material.normalTexture.index >= 0) {
+        const tinygltf::Texture& texture = model.textures[material.normalTexture.index];
+        const tinygltf::Image& image = model.images[texture.source];
+
+        TextureObject texObj;
+        texObj.id = loadTexture(image);
+        texObj.width = image.width;
+        texObj.height = image.height;
+        texObj.channels = image.component;
+        texObj.type = "normal";
+        textureObjects.push_back(texObj);
+    }
+
+    // Load ambient occlusion texture
+    if (material.occlusionTexture.index >= 0) {
+        const tinygltf::Texture& texture = model.textures[material.occlusionTexture.index];
+        const tinygltf::Image& image = model.images[texture.source];
+
+        TextureObject texObj;
+        texObj.id = loadTexture(image);
+        texObj.width = image.width;
+        texObj.height = image.height;
+        texObj.channels = image.component;
+        texObj.type = "ao";
+        textureObjects.push_back(texObj);
+    }
+}
 
 glm::mat4 MyBot::getNodeTransform(const tinygltf::Node& node) {
     glm::mat4 transform(1.0f);
@@ -382,7 +453,7 @@ bool MyBot::loadModel(tinygltf::Model& model, const char* filename) {
 
 void MyBot::initialize() {
     // Modify your path if needed
-    if (!loadModel(model, "../project/models/bot/result.gltf")) {
+    if (!loadModel(model, "../project/models/bot/praying .gltf")) {
         return;
     }
 
@@ -407,6 +478,9 @@ void MyBot::initialize() {
     lightPositionID = glGetUniformLocation(programID, "lightPosition");
     lightIntensityID = glGetUniformLocation(programID, "lightIntensity");
     jointMatricesID = glGetUniformLocation(programID, "jointMatrices");
+    diffuseMapID = glGetUniformLocation(programID, "diffuseMap");
+    normalMapID = glGetUniformLocation(programID, "normalMap");
+    aoMapID = glGetUniformLocation(programID, "aoMap");
     std::cout << "Skin objects count: " << skinObjects.size() << std::endl;
     std::cout << "Animation objects count: " << animationObjects.size() << std::endl;
 }
@@ -433,8 +507,14 @@ void MyBot::bindMesh(std::vector<PrimitiveObject>& primitiveObjects, tinygltf::M
     }
 
     for (size_t i = 0; i < mesh.primitives.size(); ++i) {
-
         tinygltf::Primitive primitive = mesh.primitives[i];
+
+        // Add this section to load material textures
+        if (primitive.material >= 0) {
+            const tinygltf::Material& material = model.materials[primitive.material];
+            loadMaterialTextures(model, material);
+        }
+
         tinygltf::Accessor indexAccessor = model.accessors[primitive.indices];
 
         GLuint vao;
@@ -580,19 +660,41 @@ void MyBot::render(glm::mat4 cameraMatrix) {
     glUniform3fv(lightPositionID, 1, &lightPosition[0]);
     glUniform3fv(lightIntensityID, 1, &lightIntensity[0]);
 
+    // Bind textures
+    for (const auto& texObj : textureObjects) {
+        if (texObj.type == "diffuse") {
+            glActiveTexture(GL_TEXTURE0);
+            glBindTexture(GL_TEXTURE_2D, texObj.id);
+            glUniform1i(diffuseMapID, 0);
+        }
+        else if (texObj.type == "normal") {
+            glActiveTexture(GL_TEXTURE1);
+            glBindTexture(GL_TEXTURE_2D, texObj.id);
+            glUniform1i(normalMapID, 1);
+        }
+        else if (texObj.type == "ao") {
+            glActiveTexture(GL_TEXTURE2);
+            glBindTexture(GL_TEXTURE_2D, texObj.id);
+            glUniform1i(aoMapID, 2);
+        }
+    }
+
     // Draw the GLTF model
     drawModel(primitiveObjects, model);
-    std::cout << "Rendering frame..." << std::endl;
-    if (primitiveObjects.empty()) {
-        std::cerr << "Error: No primitive objects to render!" << std::endl;
-    }
+
 
 }
 
 
 void MyBot::cleanup() {
     glDeleteProgram(programID);
+    for (const auto& texObj : textureObjects) {
+        glDeleteTextures(1, &texObj.id);
+    }
+    textureObjects.clear();
 }
+
+
 
 // Main Function
 int main() {

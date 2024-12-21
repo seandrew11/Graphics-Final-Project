@@ -48,12 +48,25 @@ struct MyBot {
         std::vector<glm::vec4> output;
         int interpolation;
     };
+    struct TextureObject {
+        GLuint id;
+        int width;
+        int height;
+        int channels;
+        std::string type;  // "diffuse", "normal", "ao", etc.
+    };
     struct AnimationObject {
         std::vector<SamplerObject> samplers;
     };
     std::vector<AnimationObject> animationObjects;
 
     glm::mat4 inverseRootTransform;
+    GLuint diffuseMapID;
+    GLuint normalMapID;
+    GLuint aoMapID;
+    std::vector<TextureObject> textureObjects;
+    GLuint loadTexture(const tinygltf::Image& image);
+    void loadMaterialTextures(const tinygltf::Model& model, const tinygltf::Material& material);
 
     glm::mat4 getNodeTransform(const tinygltf::Node& node);
     void computeLocalNodeTransform(const tinygltf::Model& model, int nodeIndex, std::vector<glm::mat4> &localTransforms);

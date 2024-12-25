@@ -79,11 +79,15 @@ public:
         // Render front face with pub facade
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, frontTextureID);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         glUniform1i(textureSamplerID, 0);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
         // Render other faces with brick texture
         glBindTexture(GL_TEXTURE_2D, sideTextureID);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         glDrawElements(GL_TRIANGLES, 30, GL_UNSIGNED_INT, (void*)(6 * sizeof(GLuint)));
 
         glDisableVertexAttribArray(0);

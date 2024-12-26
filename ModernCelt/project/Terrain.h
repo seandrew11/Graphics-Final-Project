@@ -23,6 +23,7 @@ public:
     void cleanup();
     float getHeight(int x, int z);
 
+
 private:
     GLuint textureID;
     GLuint textureSamplerID;
@@ -35,6 +36,7 @@ private:
     GLuint shaderProgram;
     GLuint mvpMatrixID;
     glm::mat4 modelMatrix;
+
 
     unsigned int VAO;
     unsigned int VBO;

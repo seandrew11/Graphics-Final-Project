@@ -152,10 +152,14 @@ void Building::initialize(glm::vec3 position, glm::vec3 scale, GLuint textureID,
     lightPositionID = glGetUniformLocation(programID, "lightPosition");
     lightIntensityID = glGetUniformLocation(programID, "lightIntensity");
     modelID = glGetUniformLocation(programID, "model");
+    lightSpaceMatrixID = glGetUniformLocation(programID, "lightSpaceMatrix");
+    shadowMapID = glGetUniformLocation(programID, "shadowMap");
+    depthModelID = glGetUniformLocation(programID, "model");
+    depthLightSpaceMatrixID = glGetUniformLocation(programID, "lightSpaceMatrix");
 
 }
 
-void Building::render(glm::mat4 cameraMatrix) {
+void Building::render(glm::mat4 cameraMatrix, const glm::mat4& lightSpaceMatrix) {
     glUseProgram(programID);
 
     glBindVertexArray(vertexArrayID);
@@ -178,6 +182,8 @@ void Building::render(glm::mat4 cameraMatrix) {
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferID);
 
+    glUniformMatrix4fv(lightSpaceMatrixID, 1, GL_FALSE, glm::value_ptr(lightSpaceMatrix));
+
 
     glm::mat4 modelMatrix = glm::translate(glm::mat4(1.0f), position);
     modelMatrix = glm::scale(modelMatrix, scale);
@@ -191,12 +197,42 @@ void Building::render(glm::mat4 cameraMatrix) {
     glBindTexture(GL_TEXTURE_2D, textureID);
     glUniform1i(textureSamplerID, 0);
 
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, shadowMapID);
+    glUniform1i(glGetUniformLocation(programID, "shadowMap"), 1);
+
     glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
     glDisableVertexAttribArray(2);
     glDisableVertexAttribArray(3);
+    glBindVertexArray(0);
+}
+
+void Building::renderDepth(const glm::mat4& lightSpaceMatrix) {
+    glBindVertexArray(vertexArrayID);
+
+    // Enable vertex attribute
+    glEnableVertexAttribArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferID);
+
+    // Create and use model matrix
+    glm::mat4 modelMatrix = glm::translate(glm::mat4(1.0f), position);
+    modelMatrix = glm::scale(modelMatrix, scale);
+
+    // Set uniforms for depth shader
+    glUniformMatrix4fv(depthModelID, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+    glUniformMatrix4fv(depthLightSpaceMatrixID, 1, GL_FALSE, glm::value_ptr(lightSpaceMatrix));
+
+    // Draw the building
+    glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
+    // Cleanup
+    glDisableVertexAttribArray(0);
     glBindVertexArray(0);
 }
 

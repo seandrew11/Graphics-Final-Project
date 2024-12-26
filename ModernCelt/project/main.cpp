@@ -4,6 +4,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <iostream>
+#include <stb_image_write.h>
+
 #include "Building.h"
 #include "Skybox.h"
 #include "Terrain.h"
@@ -18,6 +20,7 @@ static bool playAnimation = true;
 static float playbackSpeed = 1.0f;
 static float characterTime = 0.0f;
 static double lastTime = glfwGetTime();
+static bool saveDepth = false;
 
 // Camera variables
 static glm::vec3 cameraPos = glm::vec3(0.0f, 10.0f, 75.0f);
@@ -30,9 +33,17 @@ const glm::vec3 wave600(255.0f, 190.0f, 0.0f);
 const glm::vec3 wave700(205.0f, 0.0f, 0.0f);
 static glm::vec3 lightPosition(500.0f, 1000.0f, -500.0f);
 static glm::vec3 lightIntensity = 5.0f * (wave500 + wave600 + wave700);
+static GLuint depthMapFBO;
+static GLuint depthMap;
+const GLuint SHADOW_WIDTH = 4096;
+const GLuint SHADOW_HEIGHT = 4096;
+static GLuint depthShaderProg;
 
 // Key callback function
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    if (key == GLFW_KEY_SPACE && (action == GLFW_PRESS || action == GLFW_REPEAT)) {
+        saveDepth = true;
+    }
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GL_TRUE);
 
@@ -66,6 +77,53 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     cameraFront = glm::normalize(direction);
 }
 
+void saveDepthTexture(GLuint fbo, std::string filename) {
+    int width = SHADOW_WIDTH;
+    int height = SHADOW_HEIGHT;
+    int channels = 1;
+
+    std::vector<float> depth(width * height);
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+    glReadPixels(0, 0, width, height, GL_DEPTH_COMPONENT, GL_FLOAT, depth.data());
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+    // Convert depth values to grayscale image
+    std::vector<unsigned char> img(width * height);
+    for (int i = 0; i < width * height; ++i) {
+        img[i] = static_cast<unsigned char>(depth[i] * 255);
+    }
+
+    stbi_write_png(filename.c_str(), width, height, channels, img.data(), width * channels);
+}
+
+void initializeShadowMap() {
+    // Generate framebuffer
+    glGenFramebuffers(1, &depthMapFBO);
+
+    // Create depth texture
+    glGenTextures(1, &depthMap);
+    glBindTexture(GL_TEXTURE_2D, depthMap);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT,
+                 SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+    float borderColor[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
+
+    glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMap, 0);
+    glDrawBuffer(GL_NONE);
+    glReadBuffer(GL_NONE);
+
+    if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+        std::cerr << "Shadow Framebuffer is not complete!" << std::endl;
+    }
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
 int main() {
     // Initialize GLFW
     if (!glfwInit()) {
@@ -93,6 +151,7 @@ int main() {
 
     glfwSetKeyCallback(window, key_callback);
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
 
     // Setup shaders
     GLuint shaderProgram = LoadShadersFromFile("../project/terrain.vert", "../project/terrain.frag");
@@ -102,6 +161,9 @@ int main() {
     }
 
     // Initialize objects
+
+    initializeShadowMap();
+    depthShaderProg = LoadShadersFromFile("../project/depth.vert", "../project/depth.frag");
 
     Skybox skybox;
     skybox.initialize(glm::vec3(0.0f), glm::vec3(500.0f));
@@ -133,20 +195,60 @@ int main() {
 
     // Main loop
     while (!glfwWindowShouldClose(window)) {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        // First pass: Render depth from light's perspective
+    glm::mat4 lightProjection = glm::ortho(-100.0f, 100.0f, -100.0f, 100.0f, 1.0f, 2000.0f);
+    glm::mat4 lightView = glm::lookAt(lightPosition,
+                                     glm::vec3(0.0f), // Look at scene center
+                                     glm::vec3(0.0f, 1.0f, 0.0f));
+    glm::mat4 lightSpaceMatrix = lightProjection * lightView;
 
-        glm::mat4 viewMatrix = glm::lookAt(cameraPos, cameraPos + cameraFront, up);
-        glm::mat4 mvpMatrix = projectionMatrix * viewMatrix;
+    // Render to depth map
+    glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
+    glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+    glClear(GL_DEPTH_BUFFER_BIT);
 
-        glUseProgram(shaderProgram);
-        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "MVP"), 1, GL_FALSE, &mvpMatrix[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(glm::mat4(1.0f)));
+    // Use depth shader for shadow pass
+    glUseProgram(depthShaderProg);
+    glUniformMatrix4fv(glGetUniformLocation(depthShaderProg, "lightSpaceMatrix"),
+                       1, GL_FALSE, glm::value_ptr(lightSpaceMatrix));
 
-        glm::mat4 viewNoTranslation = glm::mat4(glm::mat3(viewMatrix));
-        glm::mat4 mvp = projectionMatrix * viewNoTranslation;
+    // Render objects for shadow mapping
+    //terrain.renderDepth(lightSpaceMatrix);
+    building.renderDepth(lightSpaceMatrix);
+    pub.renderDepth(lightSpaceMatrix);
+
+        if (saveDepth) {
+            std::string filename = "depth_map.png";
+            saveDepthTexture(depthMapFBO, filename);
+            std::cout << "Depth texture saved to " << filename << std::endl;
+            saveDepth = false;
+        }
+
+    // Second pass: Normal rendering
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glViewport(0, 0, 1024, 768);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glm::mat4 viewMatrix = glm::lookAt(cameraPos, cameraPos + cameraFront, up);
+    glm::mat4 mvpMatrix = projectionMatrix * viewMatrix;
+    glm::mat4 viewNoTranslation = glm::mat4(glm::mat3(viewMatrix));
+    glm::mat4 mvp = projectionMatrix * viewNoTranslation;
+
+    // Bind shadow map for normal rendering
+    glActiveTexture(GL_TEXTURE1); // Use different texture unit than regular textures
+    glBindTexture(GL_TEXTURE_2D, depthMap);
+
+    // Your existing render calls, but passing lightSpaceMatrix
+    glUseProgram(shaderProgram);
+    glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "MVP"), 1, GL_FALSE, &mvpMatrix[0][0]);
+    glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE,
+                       glm::value_ptr(glm::mat4(1.0f)));
+    glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "lightSpaceMatrix"), 1, GL_FALSE,
+                       glm::value_ptr(lightSpaceMatrix));
+    glUniform1i(glGetUniformLocation(shaderProgram, "shadowMap"), 1); // Texture unit 1
 
         terrain.render(mvpMatrix, lightPosition, lightIntensity);
-        building.render(mvpMatrix);
+        building.render(mvpMatrix, lightSpaceMatrix);
         pub.render(mvpMatrix);
 
         double currentTime = glfwGetTime();

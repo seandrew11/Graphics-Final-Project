@@ -14,7 +14,7 @@ public:
     ~Building();             // Destructor
 
     void initialize(glm::vec3 position, glm::vec3 scale, GLuint textureID, glm::vec3 lightPos, glm::vec3 lightInt);
-    void render(glm::mat4 cameraMatrix);
+    void render(glm::mat4 cameraMatrix, const glm::mat4& lightSpaceMatrix = glm::mat4(1.0f));
     void cleanup();
     static const GLfloat vertex_buffer_data[72];  // Vertex data for a box
     static const GLfloat color_buffer_data[72];   // Color data for each vertex
@@ -25,6 +25,7 @@ public:
     glm::vec3 lightIntensity;
     glm::mat4 modelMatrix;
     glm::mat4 lightSpaceMatrix;
+    void renderDepth(const glm::mat4& lightSpaceMatrix);
 
     // OpenGL buffer and texture IDs
     GLuint vertexArrayID;
@@ -37,11 +38,15 @@ public:
     GLuint lightPositionID;
     GLuint lightIntensityID;
     GLuint modelID;
+    GLuint lightSpaceMatrixID;
+    GLuint shadowMapID;
 
     // Shader variable IDs
     GLuint mvpMatrixID;
     GLuint textureSamplerID;
     GLuint programID;
+    GLuint depthModelID;
+    GLuint depthLightSpaceMatrixID;
 
 };
 

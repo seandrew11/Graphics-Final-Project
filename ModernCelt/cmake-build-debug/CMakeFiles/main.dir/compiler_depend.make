@@ -2066,6 +2066,7 @@ CMakeFiles/main.dir/project/main.cpp.obj: C:/Users/sandr/Desktop/College/Compute
   C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/vec3.hpp \
   C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/vec4.hpp \
   C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/vector_relational.hpp \
+  C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/tinygltf-2.9.3/stb_image_write.h \
   C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/tinygltf-2.9.3/tiny_gltf.h \
   C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glad-3.3/include/KHR/khrplatform.h \
   C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glad-3.3/include/glad/gl.h \

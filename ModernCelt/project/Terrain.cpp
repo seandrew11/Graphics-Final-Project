@@ -1,5 +1,7 @@
 #include "Terrain.h"
 #include <iostream>
+#include <glm/gtc/type_ptr.hpp>
+
 #include "../project/include/PerlinNoise.hpp"
 
 Terrain::Terrain(int w, int h, GLuint shader) : width(w),
@@ -128,6 +130,10 @@ void Terrain::setupBuffers() {
     lightPositionID = glGetUniformLocation(shaderProgram, "lightPosition");
     lightIntensityID = glGetUniformLocation(shaderProgram, "lightIntensity");
     mvpMatrixID = glGetUniformLocation(shaderProgram, "MVP");
+    lightSpaceMatrixID = glGetUniformLocation(shaderProgram, "lightSpaceMatrix");
+    shadowMapID = glGetUniformLocation(shaderProgram, "shadowMap");
+    depthModelID = glGetUniformLocation(shaderProgram, "model");
+    depthLightSpaceMatrixID = glGetUniformLocation(shaderProgram, "lightSpaceMatrix");
 
     if (modelMatrixID == -1 || lightPositionID == -1 ||
        lightIntensityID == -1 || mvpMatrixID == -1) {
@@ -143,34 +149,58 @@ void Terrain::setupBuffers() {
     modelMatrix = glm::mat4(1.0f); // Identity matrix for terrain
 }
 
-void Terrain::render(const glm::mat4& mvpMatrix, const glm::vec3& lightPos, const glm::vec3& lightInt) {
+void Terrain::render(const glm::mat4& mvpMatrix, const glm::vec3& lightPos, const glm::vec3& lightInt, const glm::mat4& lightSpaceMatrix) {
     glUseProgram(shaderProgram);
     glBindVertexArray(VAO);
 
-
     // Enable vertex attributes
-    glEnableVertexAttribArray(0); // position
-    glEnableVertexAttribArray(1); // normal
-    glEnableVertexAttribArray(2); // texcoord
+    glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(1);
+    glEnableVertexAttribArray(2);
 
-    // Set uniforms
+    // Set existing uniforms
     glUniformMatrix4fv(mvpMatrixID, 1, GL_FALSE, &mvpMatrix[0][0]);
     glUniformMatrix4fv(modelMatrixID, 1, GL_FALSE, &modelMatrix[0][0]);
     glUniform3fv(lightPositionID, 1, &lightPos[0]);
     glUniform3fv(lightIntensityID, 1, &lightInt[0]);
 
-    // Set texture
+    // Add shadow mapping uniforms
+    glUniformMatrix4fv(lightSpaceMatrixID, 1, GL_FALSE, glm::value_ptr(lightSpaceMatrix));
+
+    // Bind shadow map
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, shadowMapID);
+    glUniform1i(glGetUniformLocation(shaderProgram, "shadowMap"), 1);
+
+    // Bind terrain texture
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, textureID);
     glUniform1i(textureSamplerID, 0);
 
-    // Draw
     glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
 
-    // Cleanup
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
     glDisableVertexAttribArray(2);
+    glBindVertexArray(0);
+}
+
+void Terrain::renderDepth(const glm::mat4& lightSpaceMatrix) {
+    glBindVertexArray(VAO);
+
+    // Only need position for depth pass
+    glEnableVertexAttribArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
+
+    // Set uniforms for depth shader
+    glUniformMatrix4fv(depthModelID, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+    glUniformMatrix4fv(depthLightSpaceMatrixID, 1, GL_FALSE, glm::value_ptr(lightSpaceMatrix));
+
+    // Draw terrain
+    glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
+
+    glDisableVertexAttribArray(0);
     glBindVertexArray(0);
 }
 

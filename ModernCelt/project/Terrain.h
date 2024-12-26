@@ -18,7 +18,10 @@ public:
     Terrain(int width, int height, GLuint shader);
     ~Terrain();
 
-    void render(const glm::mat4& mvpMatrix, const glm::vec3& lightPos, const glm::vec3& lightInt);
+    void renderDepth(const glm::mat4& lightSpaceMatrix);
+
+    // Update existing render method signature
+    void render(const glm::mat4& mvpMatrix, const glm::vec3& lightPos, const glm::vec3& lightInt, const glm::mat4& lightSpaceMatrix = glm::mat4(1.0f));
     void setTexture(GLuint texID, GLuint samplerID);
     void cleanup();
     float getHeight(int x, int z);
@@ -35,6 +38,10 @@ private:
     GLuint lightIntensityID;
     GLuint shaderProgram;
     GLuint mvpMatrixID;
+    GLuint lightSpaceMatrixID;
+    GLuint shadowMapID;
+    GLuint depthModelID;
+    GLuint depthLightSpaceMatrixID;
     glm::mat4 modelMatrix;
 
 

@@ -31,7 +31,7 @@ static glm::vec3 up(0, 1, 0);
 const glm::vec3 wave500(0.0f, 255.0f, 146.0f);
 const glm::vec3 wave600(255.0f, 190.0f, 0.0f);
 const glm::vec3 wave700(205.0f, 0.0f, 0.0f);
-static glm::vec3 lightPosition(500.0f, 1000.0f, -500.0f);
+static glm::vec3 lightPosition(200.0f, 400.0f, -200.0f);
 static glm::vec3 lightIntensity = 5.0f * (wave500 + wave600 + wave700);
 static GLuint depthMapFBO;
 static GLuint depthMap;
@@ -150,6 +150,7 @@ int main() {
     }
 
     glfwSetKeyCallback(window, key_callback);
+    
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
 
@@ -196,7 +197,9 @@ int main() {
     // Main loop
     while (!glfwWindowShouldClose(window)) {
         // First pass: Render depth from light's perspective
-    glm::mat4 lightProjection = glm::ortho(-100.0f, 100.0f, -100.0f, 100.0f, 1.0f, 2000.0f);
+        glm::mat4 lightProjection = glm::ortho(-200.0f, 200.0f,
+                                          -200.0f, 200.0f,
+                                          1.0f, 1000.0f);
     glm::mat4 lightView = glm::lookAt(lightPosition,
                                      glm::vec3(0.0f), // Look at scene center
                                      glm::vec3(0.0f, 1.0f, 0.0f));
@@ -213,7 +216,7 @@ int main() {
                        1, GL_FALSE, glm::value_ptr(lightSpaceMatrix));
 
     // Render objects for shadow mapping
-    //terrain.renderDepth(lightSpaceMatrix);
+    terrain.renderDepth(lightSpaceMatrix);
     building.renderDepth(lightSpaceMatrix);
     pub.renderDepth(lightSpaceMatrix);
 
@@ -247,9 +250,9 @@ int main() {
                        glm::value_ptr(lightSpaceMatrix));
     glUniform1i(glGetUniformLocation(shaderProgram, "shadowMap"), 1); // Texture unit 1
 
-        terrain.render(mvpMatrix, lightPosition, lightIntensity);
+        terrain.render(mvpMatrix, lightPosition, lightIntensity, lightSpaceMatrix);
         building.render(mvpMatrix, lightSpaceMatrix);
-        pub.render(mvpMatrix);
+        pub.render(mvpMatrix, lightSpaceMatrix);
 
         double currentTime = glfwGetTime();
         float deltaTime = float(currentTime - lastTime);

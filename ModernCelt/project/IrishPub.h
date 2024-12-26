@@ -64,12 +64,18 @@ public:
         lightIntensityID = glGetUniformLocation(programID, "lightIntensity");
         modelID = glGetUniformLocation(programID, "model");
 
+        // Add shadow mapping uniforms
+        lightSpaceMatrixID = glGetUniformLocation(programID, "lightSpaceMatrix");
+        shadowMapID = glGetUniformLocation(programID, "shadowMap");
+        depthModelID = glGetUniformLocation(programID, "model");
+        depthLightSpaceMatrixID = glGetUniformLocation(programID, "lightSpaceMatrix");
+
         programID = LoadShadersFromFile("../project/box.vert", "../project/box.frag");
         mvpMatrixID = glGetUniformLocation(programID, "MVP");
         textureSamplerID = glGetUniformLocation(programID, "textureSampler");
     }
 
-    void render(glm::mat4 cameraMatrix) {
+    void render(glm::mat4 cameraMatrix, const glm::mat4& lightSpaceMatrix = glm::mat4(1.0f)) {
         glUseProgram(programID);
         glBindVertexArray(vertexArrayID);
 
@@ -100,8 +106,13 @@ public:
 
         glUniformMatrix4fv(mvpMatrixID, 1, GL_FALSE, &mvp[0][0]);
         glUniformMatrix4fv(modelID, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+        glUniformMatrix4fv(lightSpaceMatrixID, 1, GL_FALSE, glm::value_ptr(lightSpaceMatrix));
         glUniform3fv(lightPositionID, 1, &lightPosition[0]);
         glUniform3fv(lightIntensityID, 1, &lightIntensity[0]);
+
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, shadowMapID);
+        glUniform1i(glGetUniformLocation(programID, "shadowMap"), 1);
 
 
         // Render front face with pub facade
@@ -125,6 +136,28 @@ public:
         glBindVertexArray(0);
     }
 
+    void renderDepth(const glm::mat4& lightSpaceMatrix) {
+        glBindVertexArray(vertexArrayID);
+
+        glEnableVertexAttribArray(0);
+        glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferID);
+
+        glm::mat4 modelMatrix = glm::translate(glm::mat4(1.0f), position);
+        modelMatrix = glm::scale(modelMatrix, scale);
+
+        glUniformMatrix4fv(depthModelID, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+        glUniformMatrix4fv(depthLightSpaceMatrixID, 1, GL_FALSE, glm::value_ptr(lightSpaceMatrix));
+
+        // Draw all faces for shadow mapping
+        glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
+        glDisableVertexAttribArray(0);
+        glBindVertexArray(0);
+    }
+
 private:
     GLuint frontTextureID;
     GLuint sideTextureID;
@@ -134,6 +167,10 @@ private:
     GLuint normalBufferID;
     glm::vec3 lightPosition;
     glm::vec3 lightIntensity;
+    GLuint lightSpaceMatrixID;
+    GLuint shadowMapID;
+    GLuint depthModelID;
+    GLuint depthLightSpaceMatrixID;
     using Building::textureID; // Hide base class textureID
 };
 

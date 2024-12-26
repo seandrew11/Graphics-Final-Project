@@ -1398,6 +1398,7 @@ CMakeFiles/main.dir/project/Terrain.cpp.obj: C:/Users/sandr/Desktop/College/Comp
   C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstdint \
   C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstdio \
   C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstdlib \
+  C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstring \
   C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cwchar \
   C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cwctype \
   C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/debug/assertions.h \
@@ -1550,6 +1551,7 @@ CMakeFiles/main.dir/project/Terrain.cpp.obj: C:/Users/sandr/Desktop/College/Comp
   C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/x86_64-w64-mingw32/include/sec_api/stdio_s.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/x86_64-w64-mingw32/include/sec_api/stdlib_s.h \
+  C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/x86_64-w64-mingw32/include/sec_api/string_s.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/x86_64-w64-mingw32/include/sec_api/sys/timeb_s.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/x86_64-w64-mingw32/include/sec_api/wchar_s.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/x86_64-w64-mingw32/include/setjmp.h \
@@ -1558,6 +1560,7 @@ CMakeFiles/main.dir/project/Terrain.cpp.obj: C:/Users/sandr/Desktop/College/Comp
   C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/x86_64-w64-mingw32/include/stdint.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/x86_64-w64-mingw32/include/stdio.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/x86_64-w64-mingw32/include/stdlib.h \
+  C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/x86_64-w64-mingw32/include/string.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/x86_64-w64-mingw32/include/swprintf.inl \
   C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/x86_64-w64-mingw32/include/sys/timeb.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/x86_64-w64-mingw32/include/sys/types.h \
@@ -1623,6 +1626,12 @@ CMakeFiles/main.dir/project/Terrain.cpp.obj: C:/Users/sandr/Desktop/College/Comp
   C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/fwd.hpp \
   C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/geometric.hpp \
   C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/glm.hpp \
+  C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/constants.hpp \
+  C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/constants.inl \
+  C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/quaternion.hpp \
+  C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/quaternion.inl \
+  C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/type_ptr.hpp \
+  C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/type_ptr.inl \
   C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/integer.hpp \
   C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/mat2x2.hpp \
   C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/mat2x3.hpp \

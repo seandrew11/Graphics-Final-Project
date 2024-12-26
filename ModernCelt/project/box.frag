@@ -1,18 +1,17 @@
 #version 330 core
-in vec3 color;
-in vec2 UV;
-in vec3 worldPosition;
+in vec2 TexCoord; // Use the same name as the vertex shader
 in vec3 worldNormal;
+in vec3 worldPosition;
 
 uniform sampler2D textureSampler;
 uniform vec3 lightPosition;
 uniform vec3 lightIntensity;
 
-out vec3 finalColor;
+out vec4 FragColor;
 
 void main() {
-    // Get base color from texture only
-    vec3 baseColor = texture(textureSampler, UV).rgb;
+    // Get base color from texture
+    vec3 baseColor = texture(textureSampler, TexCoord).rgb;
 
     // Calculate lighting
     vec3 N = normalize(worldNormal);
@@ -31,5 +30,7 @@ void main() {
 
     // Final color with exposure tone mapping
     vec3 combined = ambient + diffuse;
-    finalColor = combined / (combined + vec3(1.0));
+    vec3 final = combined / (combined + vec3(1.0));
+
+    FragColor = vec4(final, 1.0);
 }

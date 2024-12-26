@@ -13,16 +13,14 @@ public:
     Building();              // Constructor
     ~Building();             // Destructor
 
-    void initialize(glm::vec3 position, glm::vec3 scale, GLuint textureID, glm::vec3 lightPos, glm::vec3 lightInt);
-    void render(glm::mat4 cameraMatrix, const glm::mat4& lightSpaceMatrix = glm::mat4(1.0f));
+    void initialize(glm::vec3 position, glm::vec3 scale, GLuint textureID);
+    void render(const glm::mat4& cameraMatrix, const glm::vec3& lightPos, const glm::vec3& lightInt, const glm::mat4& lightSpaceMatrix);
     void cleanup();
     static const GLfloat vertex_buffer_data[72];  // Vertex data for a box
     static const GLfloat color_buffer_data[72];   // Color data for each vertex
     static const GLuint index_buffer_data[36];    // Indices for the box faces
     static const GLfloat uv_buffer_data[48];      // UV texture coordinates
-    static const GLfloat normal_buffer_data[60];
-    glm::vec3 lightPosition;
-    glm::vec3 lightIntensity;
+    static const GLfloat normal_buffer_data[72];
     glm::mat4 modelMatrix;
     glm::mat4 lightSpaceMatrix;
     void renderDepth(const glm::mat4& lightSpaceMatrix);

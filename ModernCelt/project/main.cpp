@@ -31,8 +31,8 @@ static glm::vec3 up(0, 1, 0);
 const glm::vec3 wave500(0.0f, 255.0f, 146.0f);
 const glm::vec3 wave600(255.0f, 190.0f, 0.0f);
 const glm::vec3 wave700(205.0f, 0.0f, 0.0f);
-static glm::vec3 lightPosition(200.0f, 400.0f, -200.0f);
-static glm::vec3 lightIntensity = 5.0f * (wave500 + wave600 + wave700);
+static glm::vec3 lightPosition(-200.0f, 100.0f, 200.0f);
+static glm::vec3 lightIntensity = 4.0f * (wave500 + wave600 + wave700);
 static GLuint depthMapFBO;
 static GLuint depthMap;
 const GLuint SHADOW_WIDTH = 4096;
@@ -170,7 +170,7 @@ int main() {
     skybox.initialize(glm::vec3(0.0f), glm::vec3(500.0f));
 
 
-    Terrain terrain(500, 500, shaderProgram);
+    Terrain terrain(500, 500, shaderProgram, glm::vec3(0.0f, 0.0f, 0.0f));
 
     GLuint terrainTexture = LoadTextureTileBox("../project/textures/Grass_01.png");
     GLuint terrainSampler = glGetUniformLocation(shaderProgram, "terrainTexture");
@@ -186,9 +186,7 @@ int main() {
 
     Building building;
     IrishPub pub;
-    building.initialize(glm::vec3(0.0f, 6.0f, 0.0f), glm::vec3(5.0f, 40.0f, 5.0f), buildingTexture1,
-                   lightPosition,
-                   lightIntensity);
+    building.initialize(glm::vec3(0.0f, 6.0f, 0.0f), glm::vec3(5.0f, 40.0f, 5.0f), buildingTexture1);
     pub.initialize(glm::vec3(-10.0f, -5.0f, -35.0f), glm::vec3(12.0f, 16.0f, 5.0f), pubfront, pubside, lightPosition,    // Add these parameters
                lightIntensity);
 
@@ -201,7 +199,7 @@ int main() {
                                           -200.0f, 200.0f,
                                           1.0f, 1000.0f);
     glm::mat4 lightView = glm::lookAt(lightPosition,
-                                     glm::vec3(0.0f), // Look at scene center
+                                     glm::vec3(-10.0f, 0.0f, -20.0f),
                                      glm::vec3(0.0f, 1.0f, 0.0f));
     glm::mat4 lightSpaceMatrix = lightProjection * lightView;
 
@@ -251,7 +249,7 @@ int main() {
     glUniform1i(glGetUniformLocation(shaderProgram, "shadowMap"), 1); // Texture unit 1
 
         terrain.render(mvpMatrix, lightPosition, lightIntensity, lightSpaceMatrix);
-        building.render(mvpMatrix, lightSpaceMatrix);
+        building.render(mvpMatrix, lightPosition, lightIntensity, lightSpaceMatrix);
         pub.render(mvpMatrix, lightSpaceMatrix);
 
         double currentTime = glfwGetTime();

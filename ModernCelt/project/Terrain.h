@@ -15,7 +15,7 @@ struct Vertex {
 
 class Terrain {
 public:
-    Terrain(int width, int height, GLuint shader);
+    Terrain(int width, int height, GLuint shader, glm::vec3 pos);
     ~Terrain();
 
     void renderDepth(const glm::mat4& lightSpaceMatrix);
@@ -25,6 +25,7 @@ public:
     void setTexture(GLuint texID, GLuint samplerID);
     void cleanup();
     float getHeight(int x, int z);
+    glm::vec3 position = glm::vec3(0.0f);
 
 
 private:

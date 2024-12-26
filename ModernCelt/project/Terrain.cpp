@@ -1,11 +1,13 @@
 #include "Terrain.h"
 #include <iostream>
+#include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
 #include "../project/include/PerlinNoise.hpp"
 
-Terrain::Terrain(int w, int h, GLuint shader) : width(w),
+Terrain::Terrain(int w, int h, GLuint shader, glm::vec3 pos = glm::vec3(0.0f)) : width(w),
     height(h),
+position(pos),
     VAO(0),
     VBO(0),
     EBO(0),
@@ -43,13 +45,14 @@ float Terrain::getHeight(int x, int z) {
 }
 
 glm::vec3 Terrain::calculateNormal(int x, int z) {
-    float heightL = getHeight(x-1, z);
-    float heightR = getHeight(x+1, z);
-    float heightD = getHeight(x, z-1);
-    float heightU = getHeight(x, z+1);
+    glm::vec3 p0(x-1, getHeight(x-1, z), z);
+    glm::vec3 p1(x+1, getHeight(x+1, z), z);
+    glm::vec3 p2(x, getHeight(x, z-1), z-1);
+    glm::vec3 p3(x, getHeight(x, z+1), z+1);
 
-    glm::vec3 normal(heightL - heightR, 2.0f, heightD - heightU);
-    return glm::normalize(normal);
+    glm::vec3 v1 = p1 - p0;
+    glm::vec3 v2 = p3 - p2;
+    return glm::normalize(glm::cross(v2, v1));
 }
 
 void Terrain::setTexture(GLuint texID, GLuint samplerID) {
@@ -146,7 +149,8 @@ void Terrain::setupBuffers() {
 
 
     // Set up model matrix
-    modelMatrix = glm::mat4(1.0f); // Identity matrix for terrain
+    modelMatrix = glm::translate(glm::mat4(1.0f), position); // Add position member to Terrain class
+    glUniformMatrix4fv(modelMatrixID, 1, GL_FALSE, &modelMatrix[0][0]);
 }
 
 void Terrain::render(const glm::mat4& mvpMatrix, const glm::vec3& lightPos, const glm::vec3& lightInt, const glm::mat4& lightSpaceMatrix) {
@@ -161,7 +165,8 @@ void Terrain::render(const glm::mat4& mvpMatrix, const glm::vec3& lightPos, cons
     // Set existing uniforms
     glUniformMatrix4fv(mvpMatrixID, 1, GL_FALSE, &mvpMatrix[0][0]);
     glUniformMatrix4fv(modelMatrixID, 1, GL_FALSE, &modelMatrix[0][0]);
-    glUniform3fv(lightPositionID, 1, &lightPos[0]);
+    glm::vec3 worldSpaceLight = lightPos;
+    glUniform3fv(lightPositionID, 1, &worldSpaceLight[0]);
     glUniform3fv(lightIntensityID, 1, &lightInt[0]);
 
     // Add shadow mapping uniforms

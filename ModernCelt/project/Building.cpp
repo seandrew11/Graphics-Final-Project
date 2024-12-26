@@ -53,37 +53,20 @@ const GLfloat Building::uv_buffer_data[48] = {
     // Bottom (no texture)
     0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f
 };
-const GLfloat Building::normal_buffer_data[60] = {
-    // Floor
-    0.0, 1.0, 0.0,
-    0.0, 1.0, 0.0,
-    0.0, 1.0, 0.0,
-    0.0, 1.0, 0.0,
-
-    // Ceiling
-    0.0, -1.0, 0.0,
-    0.0, -1.0, 0.0,
-    0.0, -1.0, 0.0,
-    0.0, -1.0, 0.0,
-
-    // Left Wall
-    1.0, 0.0, 0.0,
-    1.0, 0.0, 0.0,
-    1.0, 0.0, 0.0,
-    1.0, 0.0, 0.0,
-
-    // Right Wall
-    -1.0, 0.0, 0.0,
-    -1.0, 0.0, 0.0,
-    -1.0, 0.0, 0.0,
-    -1.0, 0.0, 0.0,
-
-    // Back Wall
-    0.0, 0.0, 1.0,
-    0.0, 0.0, 1.0,
-    0.0, 0.0, 1.0,
-    0.0, 0.0, 1.0
-};
+const GLfloat Building::normal_buffer_data[72] = {
+    // Front face (+Z)
+    0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+    // Back face (-Z)
+    0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -1.0f,
+    // Left face (-X)
+    -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f,
+    // Right face (+X)
+    1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
+    // Top face (+Y)
+    0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,
+    // Bottom face (-Y)
+    0.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f
+ };
 
 Building::Building() : vertexArrayID(0), vertexBufferID(0), indexBufferID(0), colorBufferID(0),
                        uvBufferID(0), textureID(0), mvpMatrixID(0), textureSamplerID(0), programID(0) {}
@@ -92,13 +75,11 @@ Building::~Building() {
     cleanup();
 }
 
-void Building::initialize(glm::vec3 position, glm::vec3 scale, GLuint textureID,
-                        glm::vec3 lightPos, glm::vec3 lightInt) {
+void Building::initialize(glm::vec3 position, glm::vec3 scale, GLuint textureID) {
     this->position = position;
     this->scale = scale;
     this->textureID = textureID;
-    this->lightPosition = lightPos;
-    this->lightIntensity = lightInt;
+
 
     glGenVertexArrays(1, &vertexArrayID);
     glBindVertexArray(vertexArrayID);
@@ -159,7 +140,7 @@ void Building::initialize(glm::vec3 position, glm::vec3 scale, GLuint textureID,
 
 }
 
-void Building::render(glm::mat4 cameraMatrix, const glm::mat4& lightSpaceMatrix) {
+void Building::render(const glm::mat4& cameraMatrix, const glm::vec3& lightPos, const glm::vec3& lightInt, const glm::mat4& lightSpaceMatrix) {
     glUseProgram(programID);
 
     glBindVertexArray(vertexArrayID);
@@ -184,14 +165,17 @@ void Building::render(glm::mat4 cameraMatrix, const glm::mat4& lightSpaceMatrix)
 
     glUniformMatrix4fv(lightSpaceMatrixID, 1, GL_FALSE, glm::value_ptr(lightSpaceMatrix));
 
-
     glm::mat4 modelMatrix = glm::translate(glm::mat4(1.0f), position);
     modelMatrix = glm::scale(modelMatrix, scale);
     glm::mat4 mvp = cameraMatrix * modelMatrix;
+
     glUniformMatrix4fv(mvpMatrixID, 1, GL_FALSE, &mvp[0][0]);
     glUniformMatrix4fv(modelID, 1, GL_FALSE, glm::value_ptr(modelMatrix));
-    glUniform3fv(lightPositionID, 1, &lightPosition[0]);
-    glUniform3fv(lightIntensityID, 1, &lightIntensity[0]);
+
+
+    glm::vec3 worldSpaceLight = lightPos;
+    glUniform3fv(lightPositionID, 1, &worldSpaceLight[0]);
+    glUniform3fv(lightIntensityID, 1, &lightInt[0]);
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, textureID);
@@ -209,6 +193,7 @@ void Building::render(glm::mat4 cameraMatrix, const glm::mat4& lightSpaceMatrix)
     glDisableVertexAttribArray(3);
     glBindVertexArray(0);
 }
+
 
 void Building::renderDepth(const glm::mat4& lightSpaceMatrix) {
     glBindVertexArray(vertexArrayID);

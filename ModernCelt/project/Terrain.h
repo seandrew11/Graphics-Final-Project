@@ -15,10 +15,10 @@ struct Vertex {
 
 class Terrain {
 public:
-    Terrain(int width, int height);
+    Terrain(int width, int height, GLuint shader);
     ~Terrain();
 
-    void render();
+    void render(const glm::mat4& mvpMatrix, const glm::vec3& lightPos, const glm::vec3& lightInt);
     void setTexture(GLuint texID, GLuint samplerID);
     void cleanup();
     float getHeight(int x, int z);
@@ -29,6 +29,12 @@ private:
     siv::PerlinNoise perlin;
     std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;
+    GLuint modelMatrixID;
+    GLuint lightPositionID;
+    GLuint lightIntensityID;
+    GLuint shaderProgram;
+    GLuint mvpMatrixID;
+    glm::mat4 modelMatrix;
 
     unsigned int VAO;
     unsigned int VBO;

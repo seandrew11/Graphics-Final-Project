@@ -1,15 +1,36 @@
 #version 330 core
-
-// Input from vertex shader
 in vec2 TexCoord;
-in vec3 Normal;
+in vec3 worldNormal;
+in vec3 worldPosition;
 
-// Texture sampler
 uniform sampler2D terrainTexture;
+uniform vec3 lightPosition;
+uniform vec3 lightIntensity;
 
 out vec4 FragColor;
 
 void main() {
-    vec4 textureColor = texture(terrainTexture, TexCoord);
-    FragColor = textureColor;
+    // Get base color from texture
+    vec3 baseColor = texture(terrainTexture, TexCoord).rgb;
+
+    // Calculate lighting
+    vec3 N = normalize(worldNormal);
+    vec3 L = normalize(lightPosition - worldPosition);
+    float distance = length(lightPosition - worldPosition);
+
+    // Softer distance attenuation (matching building shader)
+    float attenuation = 1.0 / (1.0 + 0.01 * distance + 0.001 * distance * distance);
+
+    // Diffuse lighting
+    float lambertian = max(dot(N, L), 0.0);
+    vec3 diffuse = lambertian * baseColor * lightIntensity * attenuation;
+
+    // Increased ambient lighting for better base visibility
+    vec3 ambient = 0.2 * baseColor;
+
+    // Final color with exposure tone mapping
+    vec3 combined = ambient + diffuse;
+    vec3 final = combined / (combined + vec3(1.0));
+
+    FragColor = vec4(final, 1.0);
 }

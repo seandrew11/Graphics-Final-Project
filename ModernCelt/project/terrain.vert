@@ -5,12 +5,15 @@ layout(location = 1) in vec3 vertexNormal;
 layout(location = 2) in vec2 vertexTexCoord;
 
 out vec2 TexCoord;
-out vec3 Normal;
+out vec3 worldNormal;
+out vec3 worldPosition;
 
 uniform mat4 MVP;
+uniform mat4 model;  // Add model matrix uniform
 
 void main() {
     gl_Position = MVP * vec4(vertexPosition, 1.0);
+    worldPosition = (model * vec4(vertexPosition, 1.0)).xyz;
+    worldNormal = mat3(transpose(inverse(model))) * vertexNormal;
     TexCoord = vertexTexCoord;
-    Normal = vertexNormal;
 }

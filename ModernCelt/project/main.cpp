@@ -29,7 +29,7 @@ const glm::vec3 wave500(0.0f, 255.0f, 146.0f);
 const glm::vec3 wave600(255.0f, 190.0f, 0.0f);
 const glm::vec3 wave700(205.0f, 0.0f, 0.0f);
 static glm::vec3 lightPosition(500.0f, 1000.0f, -500.0f);
-static glm::vec3 lightIntensity = 1.2f * (wave500 + wave600 + wave700);
+static glm::vec3 lightIntensity = 5.0f * (wave500 + wave600 + wave700);
 
 // Key callback function
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
@@ -102,9 +102,13 @@ int main() {
     }
 
     // Initialize objects
+
     Skybox skybox;
     skybox.initialize(glm::vec3(0.0f), glm::vec3(500.0f));
-    Terrain terrain(500, 500);
+
+
+    Terrain terrain(500, 500, shaderProgram);
+
     GLuint terrainTexture = LoadTextureTileBox("../project/textures/Grass_01.png");
     GLuint terrainSampler = glGetUniformLocation(shaderProgram, "terrainTexture");
     terrain.setTexture(terrainTexture, terrainSampler);
@@ -122,7 +126,7 @@ int main() {
     building.initialize(glm::vec3(0.0f, 6.0f, 0.0f), glm::vec3(5.0f, 40.0f, 5.0f), buildingTexture1,
                    lightPosition,
                    lightIntensity);
-    pub.initialize(glm::vec3(-10.0f, 3.0f, -35.0f), glm::vec3(12.0f, 16.0f, 5.0f), pubfront, pubside, lightPosition,    // Add these parameters
+    pub.initialize(glm::vec3(-10.0f, -5.0f, -35.0f), glm::vec3(12.0f, 16.0f, 5.0f), pubfront, pubside, lightPosition,    // Add these parameters
                lightIntensity);
 
     glm::mat4 projectionMatrix = glm::perspective(glm::radians(60.0f), 1024.0f / 768.0f, 0.1f, 1000.0f);
@@ -136,11 +140,12 @@ int main() {
 
         glUseProgram(shaderProgram);
         glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "MVP"), 1, GL_FALSE, &mvpMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(glm::mat4(1.0f)));
 
         glm::mat4 viewNoTranslation = glm::mat4(glm::mat3(viewMatrix));
         glm::mat4 mvp = projectionMatrix * viewNoTranslation;
 
-        terrain.render();
+        terrain.render(mvpMatrix, lightPosition, lightIntensity);
         building.render(mvpMatrix);
         pub.render(mvpMatrix);
 

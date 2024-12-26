@@ -2,11 +2,19 @@
 #include <iostream>
 #include "../project/include/PerlinNoise.hpp"
 
-Terrain::Terrain(int w, int h) : width(w), height(h), VAO(0), VBO(0), EBO(0), textureID(0) {
+Terrain::Terrain(int w, int h, GLuint shader) : width(w),
+    height(h),
+    VAO(0),
+    VBO(0),
+    EBO(0),
+    textureID(0),
+    modelMatrix(1.0f){
+    shaderProgram = shader;
     perlin.reseed(1234);
     generateTerrain();
     setupBuffers();
 }
+
 
 Terrain::~Terrain() {
     cleanup();
@@ -115,16 +123,54 @@ void Terrain::setupBuffers() {
     glEnableVertexAttribArray(2);
 
     glBindVertexArray(0);
+
+    modelMatrixID = glGetUniformLocation(shaderProgram, "model");
+    lightPositionID = glGetUniformLocation(shaderProgram, "lightPosition");
+    lightIntensityID = glGetUniformLocation(shaderProgram, "lightIntensity");
+    mvpMatrixID = glGetUniformLocation(shaderProgram, "MVP");
+
+    if (modelMatrixID == -1 || lightPositionID == -1 ||
+       lightIntensityID == -1 || mvpMatrixID == -1) {
+        std::cerr << "Failed to get uniform locations in Terrain" << std::endl;
+        std::cerr << "model: " << modelMatrixID << std::endl;
+        std::cerr << "lightPos: " << lightPositionID << std::endl;
+        std::cerr << "lightInt: " << lightIntensityID << std::endl;
+        std::cerr << "MVP: " << mvpMatrixID << std::endl;
+    }
+
+
+    // Set up model matrix
+    modelMatrix = glm::mat4(1.0f); // Identity matrix for terrain
 }
 
-void Terrain::render() {
+void Terrain::render(const glm::mat4& mvpMatrix, const glm::vec3& lightPos, const glm::vec3& lightInt) {
+    glUseProgram(shaderProgram);
     glBindVertexArray(VAO);
 
+
+    // Enable vertex attributes
+    glEnableVertexAttribArray(0); // position
+    glEnableVertexAttribArray(1); // normal
+    glEnableVertexAttribArray(2); // texcoord
+
+    // Set uniforms
+    glUniformMatrix4fv(mvpMatrixID, 1, GL_FALSE, &mvpMatrix[0][0]);
+    glUniformMatrix4fv(modelMatrixID, 1, GL_FALSE, &modelMatrix[0][0]);
+    glUniform3fv(lightPositionID, 1, &lightPos[0]);
+    glUniform3fv(lightIntensityID, 1, &lightInt[0]);
+
+    // Set texture
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, textureID);
-    glUniform1i(textureSamplerID,0);
+    glUniform1i(textureSamplerID, 0);
 
+    // Draw
     glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
+
+    // Cleanup
+    glDisableVertexAttribArray(0);
+    glDisableVertexAttribArray(1);
+    glDisableVertexAttribArray(2);
     glBindVertexArray(0);
 }
 

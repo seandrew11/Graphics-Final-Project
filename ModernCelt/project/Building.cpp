@@ -5,6 +5,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 #include <iostream>
+#include <glm/gtc/type_ptr.hpp>
 #include <render/shader.h>
 
 // Static constant definitions
@@ -52,6 +53,37 @@ const GLfloat Building::uv_buffer_data[48] = {
     // Bottom (no texture)
     0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f
 };
+const GLfloat Building::normal_buffer_data[60] = {
+    // Floor
+    0.0, 1.0, 0.0,
+    0.0, 1.0, 0.0,
+    0.0, 1.0, 0.0,
+    0.0, 1.0, 0.0,
+
+    // Ceiling
+    0.0, -1.0, 0.0,
+    0.0, -1.0, 0.0,
+    0.0, -1.0, 0.0,
+    0.0, -1.0, 0.0,
+
+    // Left Wall
+    1.0, 0.0, 0.0,
+    1.0, 0.0, 0.0,
+    1.0, 0.0, 0.0,
+    1.0, 0.0, 0.0,
+
+    // Right Wall
+    -1.0, 0.0, 0.0,
+    -1.0, 0.0, 0.0,
+    -1.0, 0.0, 0.0,
+    -1.0, 0.0, 0.0,
+
+    // Back Wall
+    0.0, 0.0, 1.0,
+    0.0, 0.0, 1.0,
+    0.0, 0.0, 1.0,
+    0.0, 0.0, 1.0
+};
 
 Building::Building() : vertexArrayID(0), vertexBufferID(0), indexBufferID(0), colorBufferID(0),
                        uvBufferID(0), textureID(0), mvpMatrixID(0), textureSamplerID(0), programID(0) {}
@@ -60,10 +92,13 @@ Building::~Building() {
     cleanup();
 }
 
-void Building::initialize(glm::vec3 position, glm::vec3 scale, GLuint textureID) {
+void Building::initialize(glm::vec3 position, glm::vec3 scale, GLuint textureID,
+                        glm::vec3 lightPos, glm::vec3 lightInt) {
     this->position = position;
     this->scale = scale;
     this->textureID = textureID;
+    this->lightPosition = lightPos;
+    this->lightIntensity = lightInt;
 
     glGenVertexArrays(1, &vertexArrayID);
     glBindVertexArray(vertexArrayID);
@@ -98,6 +133,15 @@ void Building::initialize(glm::vec3 position, glm::vec3 scale, GLuint textureID)
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferID);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index_buffer_data), index_buffer_data, GL_STATIC_DRAW);
 
+
+    glGenBuffers(1, &normalBufferID);
+    glBindBuffer(GL_ARRAY_BUFFER, normalBufferID);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(normal_buffer_data), normal_buffer_data, GL_STATIC_DRAW);
+
+    // Set up normal attribute
+    glEnableVertexAttribArray(3);
+    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
     programID = LoadShadersFromFile("../project/box.vert", "../project/box.frag");
     if (programID == 0) {
         std::cerr << "Failed to load shaders." << std::endl;
@@ -105,6 +149,10 @@ void Building::initialize(glm::vec3 position, glm::vec3 scale, GLuint textureID)
 
     mvpMatrixID = glGetUniformLocation(programID, "MVP");
     textureSamplerID = glGetUniformLocation(programID, "textureSampler");
+    lightPositionID = glGetUniformLocation(programID, "lightPosition");
+    lightIntensityID = glGetUniformLocation(programID, "lightIntensity");
+    modelID = glGetUniformLocation(programID, "model");
+
 }
 
 void Building::render(glm::mat4 cameraMatrix) {
@@ -124,12 +172,20 @@ void Building::render(glm::mat4 cameraMatrix) {
     glBindBuffer(GL_ARRAY_BUFFER, uvBufferID);
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
+    glEnableVertexAttribArray(3);
+    glBindBuffer(GL_ARRAY_BUFFER, normalBufferID);
+    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferID);
+
 
     glm::mat4 modelMatrix = glm::translate(glm::mat4(1.0f), position);
     modelMatrix = glm::scale(modelMatrix, scale);
     glm::mat4 mvp = cameraMatrix * modelMatrix;
     glUniformMatrix4fv(mvpMatrixID, 1, GL_FALSE, &mvp[0][0]);
+    glUniformMatrix4fv(modelID, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+    glUniform3fv(lightPositionID, 1, &lightPosition[0]);
+    glUniform3fv(lightIntensityID, 1, &lightIntensity[0]);
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, textureID);
@@ -140,6 +196,7 @@ void Building::render(glm::mat4 cameraMatrix) {
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
     glDisableVertexAttribArray(2);
+    glDisableVertexAttribArray(3);
     glBindVertexArray(0);
 }
 
@@ -150,6 +207,8 @@ void Building::cleanup() {
     if (uvBufferID) glDeleteBuffers(1, &uvBufferID);
     if (indexBufferID) glDeleteBuffers(1, &indexBufferID);
     if (programID) glDeleteProgram(programID);
+    if (normalBufferID) glDeleteBuffers(1, &normalBufferID);
+
 }
 
 GLuint LoadTextureTileBox(const char *texture_file_path) {

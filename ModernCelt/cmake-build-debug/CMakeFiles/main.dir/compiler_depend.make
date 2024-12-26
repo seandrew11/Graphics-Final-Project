@@ -117,6 +117,7 @@ CMakeFiles/main.dir/project/Building.cpp.obj: C:/Users/sandr/Desktop/College/Com
   C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstdint \
   C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstdio \
   C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstdlib \
+  C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstring \
   C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cwchar \
   C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cwctype \
   C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/debug/assertions.h \
@@ -343,8 +344,12 @@ CMakeFiles/main.dir/project/Building.cpp.obj: C:/Users/sandr/Desktop/College/Com
   C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/glm.hpp \
   C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/constants.hpp \
   C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/constants.inl \
+  C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/quaternion.hpp \
+  C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/quaternion.inl \
   C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/matrix_transform.hpp \
   C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/matrix_transform.inl \
+  C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/type_ptr.hpp \
+  C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/type_ptr.inl \
   C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/integer.hpp \
   C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/mat2x2.hpp \
   C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/mat2x3.hpp \
@@ -2284,8 +2289,6 @@ C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32
 
 C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/avx5124fmapsintrin.h:
 
-C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/x86_64-w64-mingw32/include/timezoneapi.h:
-
 C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/charconv.h:
 
 C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/avx5124vnniwintrin.h:
@@ -2644,6 +2647,8 @@ C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernC
 
 C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstdio:
 
+C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstring:
+
 C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cwchar:
 
 C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cwctype:
@@ -2906,9 +2911,9 @@ C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32
 
 C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/tmmintrin.h:
 
-C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/type_ptr.hpp:
-
 C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/tsxldtrkintrin.h:
+
+C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/type_ptr.hpp:
 
 C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/uintrintrin.h:
 
@@ -3112,9 +3117,17 @@ C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernC
 
 C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/constants.inl:
 
+C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/quaternion.hpp:
+
+C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/quaternion.inl:
+
+C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iterator:
+
 C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/shared_ptr_base.h:
 
 C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/matrix_transform.hpp:
+
+C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/type_ptr.inl:
 
 C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/mat2x2.hpp:
 
@@ -3140,9 +3153,9 @@ C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernC
 
 C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/vec3.hpp:
 
-C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/vec4.hpp:
-
 C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/x86_64-w64-mingw32/include/utilapiset.h:
+
+C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/vec4.hpp:
 
 C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/vector_relational.hpp:
 
@@ -3194,8 +3207,6 @@ C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/x86_64-w64-mingw32/include
 
 C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/compare:
 
-C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstring:
-
 C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ext/concurrence.h:
 
 C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/x86_64-w64-mingw32/include/securitybaseapi.h:
@@ -3209,10 +3220,6 @@ C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32
 C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/fstream:
 
 C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/functional:
-
-C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/quaternion.inl:
-
-C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iterator:
 
 C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/map:
 
@@ -3284,6 +3291,8 @@ C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/x86_64-w64-mingw32/include
 
 C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/x86_64-w64-mingw32/include/synchapi.h:
 
+C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/x86_64-w64-mingw32/include/timezoneapi.h:
+
 C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/x86_64-w64-mingw32/include/tvout.h:
 
 C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/x86_64-w64-mingw32/include/virtdisk.h:
@@ -3307,10 +3316,6 @@ C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/x86_64-w64-mingw32/include
 C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/x86_64-w64-mingw32/include/wnnc.h:
 
 C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/x86_64-w64-mingw32/include/wow64apiset.h:
-
-C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/quaternion.hpp:
-
-C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/type_ptr.inl:
 
 C:/Users/sandr/Desktop/College/Computer\ Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/vec1.hpp:
 

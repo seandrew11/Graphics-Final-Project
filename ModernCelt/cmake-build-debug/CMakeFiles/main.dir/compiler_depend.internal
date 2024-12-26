@@ -118,6 +118,7 @@ CMakeFiles/main.dir/project/Building.cpp.obj
  C:/Program Files/JetBrains/CLion 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstdint
  C:/Program Files/JetBrains/CLion 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstdio
  C:/Program Files/JetBrains/CLion 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstdlib
+ C:/Program Files/JetBrains/CLion 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstring
  C:/Program Files/JetBrains/CLion 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cwchar
  C:/Program Files/JetBrains/CLion 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cwctype
  C:/Program Files/JetBrains/CLion 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/debug/assertions.h
@@ -344,8 +345,12 @@ CMakeFiles/main.dir/project/Building.cpp.obj
  C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/glm.hpp
  C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/constants.hpp
  C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/constants.inl
+ C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/quaternion.hpp
+ C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/quaternion.inl
  C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/matrix_transform.hpp
  C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/matrix_transform.inl
+ C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/type_ptr.hpp
+ C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/gtc/type_ptr.inl
  C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/integer.hpp
  C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/mat2x2.hpp
  C:/Users/sandr/Desktop/College/Computer Graphics/Graphics-Final-Project/ModernCelt/external/glm-0.9.7.1/glm/mat2x3.hpp

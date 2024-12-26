@@ -365,4 +365,9 @@ CMakeFiles/main.dir/project/Building.cpp.obj: \
  C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/ostream.tcc \
  C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/istream \
  C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/istream.tcc \
+ C:/Users/sandr/Desktop/College/COMPUT~1/GRAPHI~1/MODERN~1/external/GLM-09~1.1/glm/gtc/type_ptr.hpp \
+ C:/Users/sandr/Desktop/College/COMPUT~1/GRAPHI~1/MODERN~1/external/GLM-09~1.1/glm/gtc/../gtc/quaternion.hpp \
+ C:/Users/sandr/Desktop/College/COMPUT~1/GRAPHI~1/MODERN~1/external/GLM-09~1.1/glm/gtc/../gtc/quaternion.inl \
+ C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstring \
+ C:/Users/sandr/Desktop/College/COMPUT~1/GRAPHI~1/MODERN~1/external/GLM-09~1.1/glm/gtc/type_ptr.inl \
  C:/Users/sandr/Desktop/College/COMPUT~1/GRAPHI~1/MODERN~1/project/render/shader.h

@@ -32,7 +32,7 @@ const glm::vec3 wave500(0.0f, 255.0f, 146.0f);
 const glm::vec3 wave600(255.0f, 190.0f, 0.0f);
 const glm::vec3 wave700(205.0f, 0.0f, 0.0f);
 static glm::vec3 lightPosition(-200.0f, 100.0f, 200.0f);
-static glm::vec3 lightIntensity = 4.0f * (wave500 + wave600 + wave700);
+static glm::vec3 lightIntensity = 3.0f * (wave500 + wave600 + wave700);
 static GLuint depthMapFBO;
 static GLuint depthMap;
 const GLuint SHADOW_WIDTH = 4096;
@@ -248,6 +248,7 @@ int main() {
                        glm::value_ptr(lightSpaceMatrix));
     glUniform1i(glGetUniformLocation(shaderProgram, "shadowMap"), 1); // Texture unit 1
 
+        terrain.updateTerrain(cameraPos);
         terrain.render(mvpMatrix, lightPosition, lightIntensity, lightSpaceMatrix);
         building.render(mvpMatrix, lightPosition, lightIntensity, lightSpaceMatrix);
         pub.render(mvpMatrix, lightSpaceMatrix);

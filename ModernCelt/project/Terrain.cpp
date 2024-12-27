@@ -59,9 +59,38 @@ void Terrain::setTexture(GLuint texID, GLuint samplerID) {
     textureID = texID;
     textureSamplerID = samplerID;
 }
+void Terrain::updateTerrain(glm::vec3 cameraPos) {
+    // Define the threshold for moving the terrain
+    float threshold = width / 2.0f;
+
+    // Check if the camera has moved beyond the threshold
+    float deltaX = cameraPos.x - offset.x;
+    float deltaZ = cameraPos.z - offset.z;
+
+    if (abs(deltaX) > threshold || abs(deltaZ) > threshold) {
+        // Update offset to the new terrain center
+        offset.x += round(deltaX / width) * width;
+        offset.z += round(deltaZ / height) * height;
+
+        // Reuse existing terrain vertices by updating their positions
+        for (auto& vertex : vertices) {
+            vertex.position.x += round(deltaX / width) * width;
+            vertex.position.z += round(deltaZ / height) * height;
+            vertex.position.y = getHeight(vertex.position.x, vertex.position.z);
+            vertex.normal = calculateNormal(vertex.position.x, vertex.position.z);
+        }
+
+        // Update the vertex buffer only (not the indices)
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(Vertex), &vertices[0]);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+    }
+}
 
 
 void Terrain::generateTerrain() {
+    vertices.clear();
+    indices.clear();
     // Generate grid vertices
     for (int z = 0; z < height; z++) {
         for (int x = 0; x < width; x++) {

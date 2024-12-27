@@ -23,9 +23,12 @@ public:
     // Update existing render method signature
     void render(const glm::mat4& mvpMatrix, const glm::vec3& lightPos, const glm::vec3& lightInt, const glm::mat4& lightSpaceMatrix = glm::mat4(1.0f));
     void setTexture(GLuint texID, GLuint samplerID);
+    void updateTerrain(glm::vec3 cameraPos);
     void cleanup();
     float getHeight(int x, int z);
     glm::vec3 position = glm::vec3(0.0f);
+    glm::vec3 offset = glm::vec3(0.0f);
+
 
 
 private:
